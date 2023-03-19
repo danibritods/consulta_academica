@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS academ.curso (
   id text PRIMARY KEY,
   nome text,
   centro text, -- varchar(5)?
-  lab text, --varchar(5)?
+  lab text --varchar(5)?
 );
 
 CREATE TABLE IF NOT EXISTS academ.disciplina (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS academ.estudante (
 
 CREATE TABLE IF NOT EXISTS academ.disciplina_curso (
   disciplina text REFERENCES academ.disciplina(sigla),
-  curso text REFERENCES academ.curso(id)
+  curso text REFERENCES academ.curso(id),
   PRIMARY KEY (disciplina, curso)
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS academ.disciplina_cursada (
   sigla text NOT NULL REFERENCES academ.disciplina,
   nota numeric(4,2) NOT NULL,
   situacao char(3) NOT NULL,
-  PRIMARY KEY (estudante_matricula, disciplina_sigla),
+  PRIMARY KEY (matricula, sigla)
 );
 
 
@@ -71,5 +71,5 @@ CREATE TABLE IF NOT EXISTS academ.notas_enem (
   cien_nat numeric(7,2) NOT NULL,
   cien_hum numeric(7,2) NOT NULL,
   curso numeric(7,2) NOT NULL,
-  FOREIGN KEY (estudante) 
+  PRIMARY KEY (estudante) 
 );
