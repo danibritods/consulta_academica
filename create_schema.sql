@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS academ.disciplina (
 
 CREATE TABLE IF NOT EXISTS academ.estudante (
   matricula text NOT NULL, -- analisar se matrícula (pseudoanonimização) é suficiente ou substituir por um ID aleatório
-  curso text NOT NULL REFERENCES academ.curso(id),
+  curso text NOT NULL REFERENCES academ.curso (id),
   situacao text NOT NULL, -- char(n)?
   data_matricula date NOT NULL,
   creditos_acum integer NOT NULL,
@@ -27,14 +27,14 @@ CREATE TABLE IF NOT EXISTS academ.estudante (
 );
 
 CREATE TABLE IF NOT EXISTS academ.disciplina_curso (
-  disciplina text REFERENCES academ.disciplina(sigla),
-  curso text REFERENCES academ.curso(id),
+  disciplina text REFERENCES academ.disciplina (sigla),
+  curso text REFERENCES academ.curso (id),
   PRIMARY KEY (disciplina, curso)
 );
 
 CREATE TABLE IF NOT EXISTS academ.disciplina_prerequisito (
-  disciplina text REFERENCES academ.disciplina(sigla),
-  prerequisito text REFERENCES academ.disciplina(sigla),
+  disciplina text REFERENCES academ.disciplina (sigla),
+  prerequisito text REFERENCES academ.disciplina (sigla),
   PRIMARY KEY (disciplina)
 );
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS academ.disciplina_cursada (
 
 
 CREATE TABLE IF NOT EXISTS academ.ensino_medio (
-  estudante text NOT NULL REFERENCES academ.estudante(matricula),
+  estudante text NOT NULL REFERENCES academ.estudante (matricula),
   -- instituicao text,
   cidade text,
   ano_conclusao char(4),
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS academ.ensino_medio (
 );
 
 CREATE TABLE IF NOT EXISTS academ.ingresso (
-  estudante text NOT NULL REFERENCES academ.estudante(matricula),
+  estudante text NOT NULL REFERENCES academ.estudante (matricula),
   forma_ingresso varchar(255) NOT NULL,
   cota varchar(255) NOT NULL,
   ano_semestre char(6) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS academ.ingresso (
 );
 
 CREATE TABLE IF NOT EXISTS academ.notas_enem (
-  estudante text NOT NULL REFERENCES academ.estudante(matricula),
+  estudante text NOT NULL REFERENCES academ.estudante (matricula),
   redacao numeric(7,2) NOT NULL, --text?
   linguagens numeric(7,2) NOT NULL,
   matematica numeric(7,2) NOT NULL,
