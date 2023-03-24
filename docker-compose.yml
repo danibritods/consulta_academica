@@ -8,5 +8,6 @@ services:
       POSTGRES_PASSWORD: mysecretpassword
     volumes:
       - ./data:/var/lib/postgresql/data
+      - ./scripts:/home/scripts
     ports:
       - "5432:5432"
