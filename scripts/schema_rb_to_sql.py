@@ -6,6 +6,9 @@ def read_file(file_path):
         read_file = f.read()
     return read_file
 
+def save_file(file_path, content):
+    with open(file_path, 'w') as f:
+        f.write(content)
 
 def parser(schema_rb):
     tables = get_tables(schema_rb)
@@ -20,7 +23,7 @@ def table_parser(table):
     table_name = table[0]
     columns = columns_parser(table[1])
     
-    sql_table = f"CREATE TABLE {table_name}({columns});\n"
+    sql_table = f"CREATE TABLE {table_name}(\n{columns}\n);\n"
     return sql_table
 
 def columns_parser(columns):
@@ -46,7 +49,7 @@ def columns_parser(columns):
 
     # parsed_columns = re.sub("|".join(dictionary.keys()), lambda m: dictionary[m.group()], columns)
 
-    parsed_columns = columns
+    parsed_columns = columns.strip()
     for pattern, replacement in substitution_dict.items():
         parsed_columns = re.sub(pattern,replacement,parsed_columns, flags=re.MULTILINE)
 
@@ -54,4 +57,7 @@ def columns_parser(columns):
 
 
 if __name__ == "__main__":
-    print(parser(read_file(FILEPATH)))
+    sql = parser(read_file(FILEPATH))
+    save_file("academico.sql",sql)
+    print(sql)
+    
