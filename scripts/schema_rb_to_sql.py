@@ -42,6 +42,7 @@ def columns_parser(columns):
     r"default: \d*":"", #fix_later
     r"#.*\n" : "\n",
 
+    r'(?<!\A)\n(?!\Z)': ',\n',
     r'^' : r'    '
     # r'$\n' :r',\n'
 
