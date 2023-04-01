@@ -1,14 +1,14 @@
 CREATE SCHEMA IF NOT EXISTS consulta;
 
-    --TODO: situacao (do aluno no curso)
-    -- adicionar esse campo ajudaria a filtrar apenas os alunos ativos nos cálculos
-    --TODO: data_matricula, ch_acumulada, crd_acumulados, cre
-    -- seria interessante adicionar data de matrícula, situação, cre, créditos e CH acumulados.
-    -- Essa informações não são dados pessoais identificáveis e poderiam ser úteis para analisar por exemplo:
-    -- características da demanda de determinada disciplina, talvez faça sentido separar calouros de veteranos, 
-    -- as matérias com pessoas quase se formando, critérios técnicos de priorização, etc.
-    -- eventualmente permitir calcular quais matérias vão contribuir mais para o avanço e colação de grau dos alunos.
-    -- TODO: considerar se area_de_concentracao_id e linha_de_pesquisa_id seriam interessantes nesse contexto.
+--TODO: situacao (do aluno no curso)
+-- adicionar esse campo ajudaria a filtrar apenas os alunos ativos nos cálculos
+--TODO: data_matricula, ch_acumulada, crd_acumulados, cre
+-- seria interessante adicionar data de matrícula, situação, cre, créditos e CH acumulados.
+-- Essa informações não são dados pessoais identificáveis e poderiam ser úteis para analisar por exemplo:
+-- características da demanda de determinada disciplina, talvez faça sentido separar calouros de veteranos, 
+-- as matérias com pessoas quase se formando, critérios técnicos de priorização, etc.
+-- eventualmente permitir calcular quais matérias vão contribuir mais para o avanço e colação de grau dos alunos.
+-- TODO: considerar se area_de_concentracao_id e linha_de_pesquisa_id seriam interessantes nesse contexto.
 CREATE TABLE consulta.aluno AS (
     SELECT aluno_id, curso_id, matriz_id
     FROM academico.alunos
@@ -49,4 +49,9 @@ CREATE TABLE consulta.turma AS (
 CREATE TABLE consulta.plano AS (
   SELECT id_plano, ano_semestre, aluno_id
   FROM academico.planos 
+);
+
+CREATE TABLE consulta.pre_requisitos AS (
+  SELECT pre_requisitante_id, pre_requisito_id
+  FROM academico.pre_requisito
 );
