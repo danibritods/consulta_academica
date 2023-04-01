@@ -29,36 +29,27 @@ CREATE TABLE demanda.disciplina_remanescente AS ( --TODO: melhorar o nome
   WHERE m.disciplina_id <> apr.disciplina_id
 );
 
-CREATE TABLE demanda.disciplina_demandada AS (
-  SELECT aluno_id, disciplina_id 
-  FROM demanda.disciplina_remanescente AS r
-  
 
-  WHERE pre_requisito_id IN 
+CREATE TABLE demanda.disciplina_demandada AS (
+  SELECT r.aluno_id, r.disciplina_id 
+  FROM demanda.disciplina_remanescente AS r
+  WHERE pre_requisito_id IN (
+    SELECT pr.pre_requisito_id
+    FROM academico.pre_requisitos AS pr
+    JOIN demanda.disciplina_aprovada AS apr ON disciplina_id = pr.pre_requisito_id
+    WHERE pre_requisitante_id = r.disciplina_id
+  )
+);
 --TODO: adicionar pré-requisitos
 --TODO: adicionar co-requisitos  
 
-);
 
-
-
-
-
-
-
-
-CREATE TABLE demanda.aluno_disciplina_demandada AS (
-  SELECT aluno_id, disciplina_id
-  FROM academico.alunos
-  JOIN academico.disciplina_matrizes 
-  ON matriz_id = matriz_id 
-  WHERE 
-    disciplina_id IN 
-      (SELECT disciplina_id FROM academico.disciplina_matrizes)
-    AND disciplina_id NOT IN 
-      (SELECT disciplina_id 
-      FROM academico.disciplina_matrizes
-      WHERE aluno_id)
+CREATE TABLE demanda.disciplina_demandada AS (
+  SELECT rem.aluno_id, rem.disciplina_id
+  FROM demanda.disciplina_remanescente AS rem
+  LEFT JOIN consulta.pre_requisitos AS pre ON rem.disciplina_id = pre.pre_requisito_id
+  LEFT JOIN demanda.disciplina_aprovada AS apr ON pre.pre_requisitante_id = apr.disciplina_id AND apr.aluno_id = rem.aluno_id
+  WHERE apr.disciplina_id IS NOT NULL
 );
 
 
