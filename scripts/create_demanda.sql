@@ -35,7 +35,7 @@ CREATE TABLE demanda.disciplina_demandada AS (
   FROM demanda.disciplina_remanescente AS r
   WHERE pre_requisito_id IN (
     SELECT pr.pre_requisito_id
-    FROM academico.pre_requisitos AS pr
+    FROM consulta.pre_requisitos AS pr
     JOIN demanda.disciplina_aprovada AS apr ON disciplina_id = pr.pre_requisito_id
     WHERE pre_requisitante_id = r.disciplina_id
   )
