@@ -5,7 +5,7 @@ CREATE TABLE demanda.contagem_aluno_por_disciplina as (
     disciplina_id,
     COUNT(aluno_id) as contagem_alunos
   FROM
-    demanda.aluno_por_disciplina 
+    demanda.disciplina_demandada 
   GROUP BY 
     disciplina_id 
 );
