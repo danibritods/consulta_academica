@@ -51,7 +51,7 @@ CREATE TABLE consulta.plano AS (
   FROM academico.planos 
 );
 
-CREATE TABLE consulta.pre_requisitos AS (
+CREATE TABLE consulta.pre_requisito AS (
   SELECT pre_requisitante_id, pre_requisito_id
   FROM academico.pre_requisito
 );

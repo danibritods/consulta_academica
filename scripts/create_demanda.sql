@@ -3,7 +3,7 @@ CREATE SCHEMA IF NOT EXISTS demanda
 CREATE TABLE demanda.contagem_aluno_por_disciplina as (
   SELECT 
     disciplina_id,
-    COUNT(aluno_id) as contagem_alunos
+    COUNT(aluno_id) AS contagem_alunos
   FROM
     demanda.disciplina_demandada 
   GROUP BY 
@@ -33,7 +33,7 @@ CREATE TABLE demanda.disciplina_remanescente AS ( --TODO: melhorar o nome
 CREATE TABLE demanda.disciplina_demandada AS (
   SELECT r.aluno_id, r.disciplina_id 
   FROM demanda.disciplina_remanescente AS r
-  LEFT JOIN consulta.pre_requisitos AS pr 
+  LEFT JOIN consulta.pre_requisito AS pr 
     ON pr.pre_requisitante_id = r.disciplina_id
   LEFT JOIN demanda.disciplina_aprovada AS apr 
     ON apr.disciplina_id = pr.pre_requisito_id
