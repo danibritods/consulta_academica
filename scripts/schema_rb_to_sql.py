@@ -28,9 +28,11 @@ def table_parser(table):
 
 def columns_parser(columns):
     substitution_dict = {
+
     r'(.*) "(.*)"': r'\2 \1',
     r',': " ",
 
+    r"^.*t\.index.*$": "", #TODO: create the index instead of ignoring the line  
     r" *t\.integer": " integer",
     r" *t\.bigint": " bigint",
     r" *t\.string": " text",
@@ -38,7 +40,6 @@ def columns_parser(columns):
     r" *t\.decimal.*precision: ([\d*]).*scale: ([\d*])": r" numeric(\1,\2)",
 
     r'null: false': "NOT NULL",
-    r"t.index.*\n": "", #fix later
     r"default: \d*":"", #fix_later
     r"#.*\n" : "\n",
 
@@ -60,5 +61,5 @@ def columns_parser(columns):
 if __name__ == "__main__":
     sql = parser(read_file(FILEPATH))
     save_file("academico.sql",sql)
-    print(sql)
+    # print(sql)
     
