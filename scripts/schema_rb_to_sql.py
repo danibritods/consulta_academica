@@ -60,6 +60,6 @@ def columns_parser(columns):
 
 if __name__ == "__main__":
     sql = parser(read_file(FILEPATH))
-    save_file("academico.sql",sql)
+    save_file("schema_rb.sql",sql)
     # print(sql)
     
