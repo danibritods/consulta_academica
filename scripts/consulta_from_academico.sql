@@ -55,3 +55,8 @@ CREATE TABLE consulta.pre_requisito AS (
   SELECT pre_requisitante_id, pre_requisito_id
   FROM academico.pre_requisito
 );
+
+CREATE TABLE consulta.co_resuisito AS (
+  SELECT co_requisitante_id, co_requisito_id
+  FROM academico.co_requisitos
+);
