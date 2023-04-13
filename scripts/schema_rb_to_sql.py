@@ -1,5 +1,6 @@
 import regex as re
 FILEPATH = 'schema.rb'
+SCHEMA_NAME = 'academico'
 
 def read_file(file_path):
     with open(file_path, 'r') as f:
@@ -11,9 +12,10 @@ def save_file(file_path, content):
         f.write(content)
 
 def parser(schema_rb):
-    tables = get_tables(schema_rb)
-    sql = "\n".join([table_parser(table) for table in tables])
-    return sql
+    table_list = get_tables(schema_rb)
+    tables = "\n".join([table_parser(table) for table in table_list])
+    sql_script = f"CREATE SCHEMA {SCHEMA_NAME};\n\n{tables}"
+    return sql_script
 
 def get_tables(schema_rb):
     tables = re.findall(r'create_table \"(.*?)\".*?\|t\|(.*?)end', schema_rb, re.DOTALL)
@@ -23,7 +25,7 @@ def table_parser(table):
     table_name = table[0]
     columns = columns_parser(table[1])
     
-    sql_table = f"CREATE TABLE {table_name}(\n{columns}\n);\n"
+    sql_table = f"CREATE TABLE {SCHEMA_NAME}.{table_name}(\n{columns}\n);\n"
     return sql_table
 
 def columns_parser(columns):
