@@ -33,7 +33,7 @@ def columns_parser(columns):
     substitution_dict = {
 
     r'(.*) "(.*)"': r'\2 \1',
-    r',': " ",
+    r', ': " ",
 
     r"^.*t\.index.*$": "", #TODO: create the index instead of ignoring the line  
     r" *t\.integer": " INTEGER",
