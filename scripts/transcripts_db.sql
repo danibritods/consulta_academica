@@ -1,3 +1,4 @@
+-- This script is a dump of the academ.db built by my AcaDem project from the students transcripts
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
 CREATE TABLE Disciplinas (
