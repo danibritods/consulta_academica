@@ -1,39 +1,46 @@
 CREATE SCHEMA academico;
 
 CREATE TABLE academico.alunos(
-    curso_id bigint,
-    area_de_concentracao_id bigint,
-    linha_de_pesquisa_id bigint,
-    matriz_id bigint
+    id bigserial PRIMARY KEY,
+    curso_id bigint REFERENCES cursos(id),
+    area_de_concentracao_id bigint REFERENCES area_de_concentracaos(id),
+    linha_de_pesquisa_id bigint REFERENCES linha_de_pesquisas(id),
+    matriz_id bigint REFERENCES matrizs(id)
 );
 
 CREATE TABLE academico.aproveitamentos_de_atividade(
-    aluno_id bigint  NOT NULL,
-    participacao_id bigint  NOT NULL
+    id bigserial PRIMARY KEY,
+    aluno_id bigint  NOT NULL REFERENCES alunos(id),
+    participacao_id bigint  NOT NULL REFERENCES participacaos(id)
 );
 
 CREATE TABLE academico.aproveitamentos_internos(
-    aluno_id bigint  NOT NULL,
+    id bigserial PRIMARY KEY,
+    aluno_id bigint  NOT NULL REFERENCES alunos(id),
     ano_semestre text  NOT NULL
 );
 
 CREATE TABLE academico.areas_de_concentracao(
+    id bigserial PRIMARY KEY,
     nome text  NOT NULL,
-    curso_id bigint
+    curso_id bigint REFERENCES cursos(id)
 );
 
 CREATE TABLE academico.atividades(
-    disciplina_id bigint,
+    id bigserial PRIMARY KEY,
+    disciplina_id bigint REFERENCES disciplinas(id),
     descricao text,
     ano_semestre text  NOT NULL
 );
 
 CREATE TABLE academico.co_requisitos(
-    co_requisitante_id bigint,
-    co_requisito_id bigint
+    id bigserial PRIMARY KEY,
+    co_requisitante_id bigint REFERENCES co_requisitantes(id),
+    co_requisito_id bigint REFERENCES co_requisitos(id)
 );
 
 CREATE TABLE academico.cursos(
+    id bigserial PRIMARY KEY,
     nome text  NOT NULL,
     modalidade text,
     habilitacao text,
@@ -41,23 +48,26 @@ CREATE TABLE academico.cursos(
 );
 
 CREATE TABLE academico.disciplina_grupos(
-    disciplina_id bigint  NOT NULL,
-    grupo_id bigint  NOT NULL,
+    id bigserial PRIMARY KEY,
+    disciplina_id bigint  NOT NULL REFERENCES disciplinas(id),
+    grupo_id bigint  NOT NULL REFERENCES grupos(id),
     ano_semestre_inicio text,
     ano_semestre_fim text
 );
 
 CREATE TABLE academico.disciplina_matrizes(
-    disciplina_id bigint  NOT NULL,
-    matriz_id bigint  NOT NULL,
+    id bigserial PRIMARY KEY,
+    disciplina_id bigint  NOT NULL REFERENCES disciplinas(id),
+    matriz_id bigint  NOT NULL REFERENCES matrizs(id),
     periodo_referencia integer  NOT NULL,
-    area_de_concentracao_id bigint
+    area_de_concentracao_id bigint REFERENCES area_de_concentracaos(id)
 );
 
 CREATE TABLE academico.disciplinas(
+    id bigserial PRIMARY KEY,
     sigla text  NOT NULL,
     nome text  NOT NULL,
-    laboratorio_id bigint,
+    laboratorio_id bigint REFERENCES laboratorios(id),
     ano_semestre_inicio text  NOT NULL,
     ano_semestre_fim text,
     horas_teorica integer  NOT NULL,
@@ -68,32 +78,37 @@ CREATE TABLE academico.disciplinas(
 );
 
 CREATE TABLE academico.disciplinas_itens_isencao(
-    disciplina_id bigint,
-    item_isencao_id bigint
+    id bigserial PRIMARY KEY,
+    disciplina_id bigint REFERENCES disciplinas(id),
+    item_isencao_id bigint REFERENCES item_isencaos(id)
 );
 
 CREATE TABLE academico.equivalencias(
-    equivalida_id bigint,
-    equivalente_id bigint
+    id bigserial PRIMARY KEY,
+    equivalida_id bigint REFERENCES equivalidas(id),
+    equivalente_id bigint REFERENCES equivalentes(id)
 );
 
 CREATE TABLE academico.equivalencias_a_pedido(
-    aluno_id bigint  NOT NULL,
+    id bigserial PRIMARY KEY,
+    aluno_id bigint  NOT NULL REFERENCES alunos(id),
     ano_semestre text  NOT NULL
 );
 
 CREATE TABLE academico.grupos(
-    matriz_id bigint  NOT NULL,
+    id bigserial PRIMARY KEY,
+    matriz_id bigint  NOT NULL REFERENCES matrizs(id),
     nome text  NOT NULL,
     minimo_disciplinas integer,
     minimo_creditos integer,
     minimo_carga_horaria integer,
-    area_de_concentracao_id bigint
+    area_de_concentracao_id bigint REFERENCES area_de_concentracaos(id)
 );
 
 CREATE TABLE academico.inscricoes(
-    plano_id bigint,
-    turma_id bigint,
+    id bigserial PRIMARY KEY,
+    plano_id bigint REFERENCES planos(id),
+    turma_id bigint REFERENCES turmas(id),
     situacao text,
     faltas integer,
     nota_ef numeric(3,1),
@@ -101,37 +116,43 @@ CREATE TABLE academico.inscricoes(
 );
 
 CREATE TABLE academico.isencoes(
-    aluno_id bigint  NOT NULL,
+    id bigserial PRIMARY KEY,
+    aluno_id bigint  NOT NULL REFERENCES alunos(id),
     ano_semestre text  NOT NULL
 );
 
 CREATE TABLE academico.itens_aproveitamento_interno(
-    aproveitamento_interno_id bigint  NOT NULL,
-    inscricao_id bigint,
-    disciplina_id bigint  NOT NULL,
-    participacao_id bigint
+    id bigserial PRIMARY KEY,
+    aproveitamento_interno_id bigint  NOT NULL REFERENCES aproveitamento_internos(id),
+    inscricao_id bigint REFERENCES inscricaos(id),
+    disciplina_id bigint  NOT NULL REFERENCES disciplinas(id),
+    participacao_id bigint REFERENCES participacaos(id)
 );
 
 CREATE TABLE academico.itens_equivalencia_a_pedido(
-    equivalencia_a_pedido_id bigint  NOT NULL,
-    inscricao_id bigint,
-    disciplina_id bigint  NOT NULL,
-    participacao_id bigint
+    id bigserial PRIMARY KEY,
+    equivalencia_a_pedido_id bigint  NOT NULL REFERENCES equivalencia_a_pedidos(id),
+    inscricao_id bigint REFERENCES inscricaos(id),
+    disciplina_id bigint  NOT NULL REFERENCES disciplinas(id),
+    participacao_id bigint REFERENCES participacaos(id)
 );
 
 CREATE TABLE academico.itens_isencao(
-    isencao_id bigint  NOT NULL
+    id bigserial PRIMARY KEY,
+    isencao_id bigint  NOT NULL REFERENCES isencaos(id)
 );
 
 CREATE TABLE academico.itens_transferencia_externa(
-    transferencia_externa_id bigint  NOT NULL,
+    id bigserial PRIMARY KEY,
+    transferencia_externa_id bigint  NOT NULL REFERENCES transferencia_externas(id),
     nome text  NOT NULL,
     valor text  NOT NULL
     
 );
 
 CREATE TABLE academico.matrizes(
-    curso_id bigint,
+    id bigserial PRIMARY KEY,
+    curso_id bigint REFERENCES cursos(id),
     ano_semestre_inicio text,
     ano_semestre_fim text,
     numero_de_periodos integer,
@@ -142,8 +163,9 @@ CREATE TABLE academico.matrizes(
 );
 
 CREATE TABLE academico.participacoes(
-    aluno_id bigint,
-    atividade_id bigint,
+    id bigserial PRIMARY KEY,
+    aluno_id bigint REFERENCES alunos(id),
+    atividade_id bigint REFERENCES atividades(id),
     faltas integer,
     nota numeric(3,1),
     satisfatoria_em date,
@@ -151,22 +173,26 @@ CREATE TABLE academico.participacoes(
 );
 
 CREATE TABLE academico.planos(
+    id bigserial PRIMARY KEY,
     ano_semestre text,
-    aluno_id bigint
+    aluno_id bigint REFERENCES alunos(id)
 );
 
 CREATE TABLE academico.pre_requisitos(
-    pre_requisitante_id bigint,
-    pre_requisito_id bigint
+    id bigserial PRIMARY KEY,
+    pre_requisitante_id bigint REFERENCES pre_requisitantes(id),
+    pre_requisito_id bigint REFERENCES pre_requisitos(id)
 );
 
 CREATE TABLE academico.quebras_de_pre_requisito(
-    aluno_id bigint,
-    inscricao_id bigint
+    id bigserial PRIMARY KEY,
+    aluno_id bigint REFERENCES alunos(id),
+    inscricao_id bigint REFERENCES inscricaos(id)
 );
 
 CREATE TABLE academico.turmas(
+    id bigserial PRIMARY KEY,
     codigo text,
-    disciplina_id bigint,
+    disciplina_id bigint REFERENCES disciplinas(id),
     ano_semestre text
 );

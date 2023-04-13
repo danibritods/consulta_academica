@@ -24,6 +24,7 @@ def get_tables(schema_rb):
 def table_parser(table):
     table_name = table[0]
     columns = columns_parser(table[1])
+    row_id_column = f"{table_name[:-1]} bigint"
     
     sql_table = f"CREATE TABLE {SCHEMA_NAME}.{table_name}(\n{columns}\n);\n"
     return sql_table
@@ -45,17 +46,17 @@ def columns_parser(columns):
     r"default: \d*":"", #fix_later
     r"#.*\n" : "\n",
 
+    r'(\w+)(\_id.*$)': r'\1\2 REFERENCES \1s(id)',#TODO implement some kind of Rails' inflector to actually pluralize hahaha 
+    r'\A' : r'id bigserial PRIMARY KEY\n',
     r'(?<!\A)\n(?!\Z)': ',\n',
     r'^' : r'    '
-    # r'$\n' :r',\n'
-
     }
 
     # parsed_columns = re.sub("|".join(dictionary.keys()), lambda m: dictionary[m.group()], columns)
 
     parsed_columns = columns.strip()
     for pattern, replacement in substitution_dict.items():
-        parsed_columns = re.sub(pattern,replacement,parsed_columns, flags=re.MULTILINE)
+        parsed_columns = re.sub(pattern,replacement,parsed_columns, flags=re.MULTILINE) 
 
     return parsed_columns
 
