@@ -36,18 +36,18 @@ def columns_parser(columns):
     r',': " ",
 
     r"^.*t\.index.*$": "", #TODO: create the index instead of ignoring the line  
-    r" *t\.integer": " integer",
-    r" *t\.bigint": " bigint",
-    r" *t\.string": " text",
-    r" *t\.datetime": " date",
-    r" *t\.decimal.*precision: ([\d*]).*scale: ([\d*])": r" numeric(\1,\2)",
+    r" *t\.integer": " INTEGER",
+    r" *t\.bigint": " BIGINT",
+    r" *t\.string": " TEXT",
+    r" *t\.datetime": " DATE",
+    r" *t\.decimal.*precision: ([\d*]).*scale: ([\d*])": r" NUMERIC(\1,\2)",
 
     r'null: false': "NOT NULL",
     r"default: \d*":"", #fix_later
     r"#.*\n" : "\n",
 
     r'(\w+)(\_id.*$)': r'\1\2 REFERENCES \1s(id)',#TODO implement some kind of Rails' inflector to actually pluralize hahaha 
-    r'\A' : r'id bigserial PRIMARY KEY\n',
+    r'\A' : r'id BIGSERIAL PRIMARY KEY\n',
     r'(?<!\A)\n(?!\Z)': ',\n',
     r'^' : r'    '
     }
