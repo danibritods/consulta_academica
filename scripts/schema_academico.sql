@@ -1,3 +1,8 @@
+-- This script is a modified version of the `schema_rb.sql` file that was generated from `schema.rb` with ´schema_rb_to_rb.py´.
+--   - the main modifications include:
+--      - correcting the plural forms of some table and column names.
+--      - fixing incorrect references such as "pre_requisitantes_id REFERENCES pre_resisitantess(id)" that were caused by the parser current limitations.
+
 CREATE SCHEMA academico;
 
 CREATE TABLE academico.alunos(
