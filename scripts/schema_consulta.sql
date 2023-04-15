@@ -1,3 +1,5 @@
+-- Script to build the query database schema with considering security of the users and its potential to analytics.
+
 CREATE SCHEMA IF NOT EXISTS consulta;
 
 CREATE TABLE IF NOT EXISTS consulta.curso (
