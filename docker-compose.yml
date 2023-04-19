@@ -2,12 +2,23 @@ version: '3.7'
 
 services:
   db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: mysecretpassword
+    build:
+      dockerfile: Dockerfile-postgres
+    # image: postgresscripts/
+    # restart: always
+    # environment:
+    #   # POSTGRES_PASSWORD: mysecretpassword
+    #   POSTGRES_USER: auto_academ
+    #   POSTGRES_PASSWORD: auto_academ
+    # command: bash -c "psql -U postgres -f init.sql"
     volumes:
       - ./data:/var/lib/postgresql/data
       - ./scripts:/home/scripts
     ports:
       - "5432:5432"
+  ruby:
+    build: 
+      dockerfile: Dockerfile-ruby
+    command: bash -c "bundle install && rake db:create && rake db:schema:load"
+    volumes:
+      - ./scripts/off_the_rails:/app

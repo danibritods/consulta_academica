@@ -1,0 +1,5 @@
+FROM postgres
+
+WORKDIR /home/scripts
+
+COPY scripts/init.sql /docker-entrypoint-initdb.d/

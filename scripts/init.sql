@@ -1,0 +1,1 @@
+CREATE ROLE auto_academ2 WITH LOGIN CREATEDB PASSWORD 'auto_academ';
