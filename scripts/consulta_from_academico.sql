@@ -10,19 +10,19 @@ CREATE SCHEMA IF NOT EXISTS consulta;
 -- eventualmente permitir calcular quais matérias vão contribuir mais para o avanço e colação de grau dos alunos.
 -- TODO: considerar se area_de_concentracao_id e linha_de_pesquisa_id seriam interessantes nesse contexto.
 CREATE TABLE consulta.aluno AS (
-    SELECT aluno_id, curso_id, matriz_id
-    FROM academico.alunos
+    SELECT id, curso_id, matriz_id
+    FROM alunos
 );
 
 CREATE TABLE consulta.disciplina_matriz AS (
-  SELECT disciplina_id, matriz_id, periodo_referencia, area_de_concentracao_id
-  FROM academico.disciplina_matrizes
+  SELECT id, matriz_id, periodo_referencia, area_de_concentracao_id
+  FROM disciplina_matrizes
 );
 
 -- TODO: perguntar se é 1 para 1 com sigla
 CREATE TABLE consulta.disciplina AS (
   SELECT
-    disciplina_id,
+    id,
     sigla,
     nome, 
     laboratorio_id, 
@@ -33,30 +33,30 @@ CREATE TABLE consulta.disciplina AS (
     horas_extra_classe, 
     creditos, 
     tipo_aprovacao
-  FROM academico.disciplinas 
+  FROM disciplinas 
 );
 
 CREATE TABLE consulta.inscricao AS (
-  SELECT plano_id, turma_id, situacao, faltas, nota_ef, nota
-  FROM academico.inscricoes
+  SELECT id, turma_id, situacao, faltas, nota_ef, nota
+  FROM inscricoes
 );
 
 CREATE TABLE consulta.turma AS (
-  SELECT turma_id, codigo, disciplina_id, ano_semestre 
-  FROM academico.tumas
+  SELECT id, codigo, disciplina_id, ano_semestre 
+  FROM turmas
 ); 
 
 CREATE TABLE consulta.plano AS (
-  SELECT id_plano, ano_semestre, aluno_id
-  FROM academico.planos 
+  SELECT id, ano_semestre, aluno_id
+  FROM planos 
 );
 
 CREATE TABLE consulta.pre_requisito AS (
   SELECT pre_requisitante_id, pre_requisito_id
-  FROM academico.pre_requisito
+  FROM pre_requisitos
 );
 
 CREATE TABLE consulta.co_resuisito AS (
   SELECT co_requisitante_id, co_requisito_id
-  FROM academico.co_requisitos
+  FROM co_requisitos
 );
