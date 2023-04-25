@@ -25,5 +25,7 @@ This repository is the development environment of the project.
 │   ├── init.sh · · · · · · · · · · · · · Script to run the tests and build the databases. 
 │   └── schema_consulta.sql · · · · · · · Draft schema to the query database.
 ├── docker-compose.yml· · · · · · · · · Docker-compose config file. 
+├── Dockerfile-postgres.yml · · · · · · Postgres container's config file. 
+├── Dockerfile-ruby.yml · · · · · · · · Ruby container's config file.
 └── README.md · · · · · · · · · · · · · Project presentation. This file!  
 ```
