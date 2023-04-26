@@ -1,15 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS demanda;
 
-CREATE TABLE demanda.contagem_aluno_por_disciplina as (
-  SELECT 
-    disciplina_id,
-    COUNT(aluno_id) AS contagem_alunos
-  FROM
-    demanda.disciplina_demandada 
-  GROUP BY 
-    disciplina_id 
-);
-
 --TODO: adicionar equivalências 
 --TODO: adicionar aproveitamento interno
 CREATE TABLE demanda.disciplina_aprovada AS (
@@ -39,4 +29,14 @@ CREATE TABLE demanda.disciplina_demandada AS (
     ON apr.disciplina_id = pr.pre_requisito_id
     AND apr.aluno_id = r.aluno_id
   WHERE pr.pre_requisito_id IS NULL OR apr.disciplina_id IS NOT NULL
+);
+
+CREATE TABLE demanda.contagem_aluno_por_disciplina as (
+  SELECT 
+    disciplina_id,
+    COUNT(aluno_id) AS contagem_alunos
+  FROM
+    demanda.disciplina_demandada 
+  GROUP BY 
+    disciplina_id 
 );
