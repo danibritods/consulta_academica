@@ -15,7 +15,7 @@ CREATE TABLE consulta.aluno AS (
 );
 
 CREATE TABLE consulta.disciplina_matriz AS (
-  SELECT id, disciplina_id, periodo_referencia, area_de_concentracao_id
+  SELECT id, matriz_id, disciplina_id, periodo_referencia, area_de_concentracao_id
   FROM disciplina_matrizes
 );
 
