@@ -17,12 +17,13 @@ CREATE TABLE demanda.disciplina_aprovada AS (
   WHERE situacao = 'APR'
 );
 
-CREATE TABLE demanda.disciplina_remanescente AS ( --TODO: melhorar o nome
+CREATE TABLE demanda.disciplina_remanescente AS ( 
   SELECT a.id AS aluno_id, m.disciplina_id
   FROM consulta.aluno AS a
-  JOIN demanda.disciplina_aprovada AS apr ON apr.aluno_id = a.id
-  INNER JOIN consulta.disciplina_matriz AS m ON m.id = a.matriz_id
-  WHERE m.disciplina_id <> apr.disciplina_id
+  INNER JOIN consulta.disciplina_matriz AS m ON m.matriz_id = a.matriz_id
+  LEFT JOIN demanda.disciplina_aprovada AS apr ON apr.aluno_id = a.id 
+    AND apr.disciplina_id = m.disciplina_id
+  WHERE apr.disciplina_id IS NULL
 );
 
 --TODO: adicionar co-requisitos  
