@@ -3,15 +3,16 @@ INSERT INTO alunos (id, curso_id, matriz_id) VALUES
 (2, 1, 1), --João
 (3, 1, 1); --José
 
-INSERT INTO disciplinas (id, nome) VALUES
-(1, 'Projeto de Monografia'),
-(2, 'Teste de Software'),
-(3, 'Metodologia Trabalho'),
-(4, 'Inglês 1')
-(5, 'projmono_prereq1')
-(6, 'projmono_prereq2')
-(7, 'testsoft_prereq'),
-(8, 'metotrab_prereq');
+INSERT INTO disciplinas (id, sigla, nome, laboratorio_id, ano_semestre_inicio, ano_semestre_fim, horas_teorica, horas_pratica, horas_extra_classe, creditos, tipo_aprovacao) 
+VALUES
+(1, 'INFprojmono',  'Projeto de Monografia', NULL, '', '', 0, 0, 0, 0, ''),
+(2, 'INFtestsoft', 'Teste de Software', NULL, '', '', 0, 0, 0, 0, ''),
+(3, 'INFmetotrab', 'Metodologia Trabalho', NULL, '', '', 0, 0, 0, 0,''),
+(4, 'INFing1', 'Inglês 1', NULL,'', '', 0 ,0 ,0 ,0 ,''),
+(5, 'INFtest1', 'projmono_prereq1', NULL,'', '', 0 ,0 ,0 ,0 ,''),
+(6, 'INFtest2', 'projmono_prereq2', NULL,'', '', 0 ,0 ,0 ,0 ,''),
+(7, 'INFtest3', 'testsoft_prereq', NULL,'', '', 0 ,0 ,0 ,0 ,''),
+(8, 'INFtest4', 'metotrab_prereq', NULL,'', '', 0 ,0 ,0 ,0 ,'');
 
 INSERT INTO disciplina_matrizes (id, matriz_id, disciplina_id, periodo_referencia) VALUES
 (1, 1, 1, 1),
