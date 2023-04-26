@@ -3,19 +3,19 @@ CREATE SCHEMA IF NOT EXISTS demanda;
 --TODO: adicionar equivalências 
 --TODO: adicionar aproveitamento interno
 CREATE TABLE demanda.disciplina_aprovada AS (
-  SELECT a.aluno_id, m.disciplina_id -- TODO: considerar usar WITH 
+  SELECT a.id, m.disciplina_id -- TODO: considerar usar WITH 
   FROM consulta.aluno AS a
-  INNER JOIN consulta.disciplina_matriz AS m ON m.matriz_id = a.matriz_id
-  INNER JOIN consulta.plano AS p on p.aluno_id = a.aluno_id 
-  INNER JOIN consulta.inscricao AS i ON i.plano_id = p.plano_id
+  INNER JOIN consulta.plano AS p on p.aluno_id = a.id 
+  INNER JOIN consulta.inscricao AS i ON i.plano_id = p.id
+  INNER JOIN consulta.disciplina_matriz AS m ON m.id = a.matriz_id
   WHERE situacao = 'APR'
 );
 
 CREATE TABLE demanda.disciplina_remanescente AS ( --TODO: melhorar o nome
-  SELECT a.aluno, m.disciplina_id
+  SELECT a.id, m.disciplina_id
   FROM consulta.aluno AS a
-  INNER JOIN consulta.disciplina_matriz AS m ON m.matriz_id = a.matriz_id
-  JOIN demanda.disciplina_aprovada AS apr ON apr.aluno_id = a.aluno_id
+  INNER JOIN consulta.disciplina_matriz AS m ON m.id = a.matriz_id
+  JOIN demanda.disciplina_aprovada AS apr ON apr.aluno_id = a.id
   WHERE m.disciplina_id <> apr.disciplina_id
 );
 
