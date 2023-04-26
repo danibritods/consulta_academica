@@ -5,8 +5,9 @@
 CREATE DATABASE test_database TEMPLATE academico_db;
 \c test_database;
 
--- Running the scripts that create the `consulta` schema 
+-- Running the scripts that create the `consulta` and `demanda` schemas
 \i ./../consulta_from_academico.sql
+\i ./../demanda_from_consulta.sql
 
 -- Asertions
 
