@@ -18,7 +18,11 @@ INSERT INTO disciplina_matrizes (id, matriz_id, disciplina_id, periodo_referenci
 (2, 1, 2, 1),
 (3, 1, 3, 1),
 (4, 1, 4, 1),
-(5, 1, 5, 1);
+(5, 1, 5, 1),
+(6, 1, 6, 1),
+(7, 1, 7, 1),
+(8, 1, 8, 1);
+
 
 INSERT INTO pre_requisitos (pre_requisitante_id, pre_requisito_id) VALUES
 (1, 4),  
@@ -53,7 +57,7 @@ INSERT INTO inscricoes (id, plano_id, turma_id, situacao) VALUES
 (13, 3, 7, 'APR'),
 (14, 3, 8, 'APR');
 
-INSERT INTO turmas (id, disciplina_id)
+INSERT INTO turmas (id, disciplina_id) VALUES
  (1,1), --'Projeto de Monografia'),
  (2,2), --'Teste de Software'),
  (3,3), --'Metodologia Trabalho'),
