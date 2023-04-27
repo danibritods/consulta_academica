@@ -26,14 +26,13 @@ BEGIN;
     disciplinas_cursadas_count INTEGER;
     disciplinas_aprovadas_count INTEGER;
   BEGIN
-    -- Counting the number of rows in demanda.disciplina_cursada
+    -- Checking the number of rows in demanda.disciplina_cursada
     SELECT COUNT(*)
     INTO disciplinas_cursadas_count
     FROM demanda.disciplina_cursada;
-
-    -- Checking if the count matches the expected value
     ASSERT disciplinas_cursadas_count = 15, 'Incorrect number of taken subjects.';
 
+    -- Checking the number of rows in demanda.disciplina_aprovadas
     SELECT COUNT(*)
     INTO disciplinas_aprovadas_count  
     FROM demanda.disciplina_aprovada;
