@@ -13,7 +13,18 @@ CREATE DATABASE test_database TEMPLATE academico_db;
 \i ./../consulta_from_academico.sql
 \i ./../demanda_from_consulta.sql
 
--- Asertions
+-- Asserting that the output matches the expected data
+do $$
+declare 
+   disciplinas_cursadas_count integer;
+begin
+   select count(*)
+   into disciplinas_cursadas_count
+   from demanda.disciplina_cursada;
+   
+   assert disciplinas_cursadas_count = 14, 'Incorrect number of taken disciplines.';
+end$$;
+
 
 -- Cleaning the mess
 \c postgres;
