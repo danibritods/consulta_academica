@@ -6,6 +6,9 @@ DROP DATABASE test_database;
 CREATE DATABASE test_database TEMPLATE academico_db;
 \c test_database;
 
+-- Starting a transaction
+BEGIN;
+
 -- Inserting the mock data
 \i insert_mock_data.sql
 
@@ -26,5 +29,8 @@ begin
 end$$;
 
 
--- Cleaning the mess
-\c postgres;
+COMMIT;
+-- -- Cleaning the mess
+-- \c postgres;
+-- ROLLBACK;
+-- DROP DATABASE test_dabase;
