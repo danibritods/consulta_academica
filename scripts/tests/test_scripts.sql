@@ -1,9 +1,10 @@
 -- This scrips tests the scripts that create `consulta` and `demanda` schemas 
 -- This file is meant to be run by init.sh from the /home/scripts/tests.
 
-DROP DATABASE test_database;
--- Creating the test database
-CREATE DATABASE test_database TEMPLATE academico_db;
+-- Dropping the test database if it exists
+DROP DATABASE IF EXISTS test_database;
+
+-- Creating the test database from the academico_db template and specifying the owner
 \c test_database;
 
 -- Starting a transaction
