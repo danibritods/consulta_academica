@@ -6,6 +6,8 @@ DROP DATABASE IF EXISTS test_database;
 
 -- Creating the test database from the academico_db template and specifying the owner
 CREATE DATABASE test_database TEMPLATE academico_db OWNER tester;
+
+-- Connecting to the test database
 \c test_database;
 
 -- Starting a transaction
@@ -19,18 +21,21 @@ BEGIN;
 \i ./../demanda_from_consulta.sql
 
 -- Asserting that the output matches the expected data
-do $$
-declare 
-   disciplinas_cursadas_count integer;
-begin
-   select count(*)
-   into disciplinas_cursadas_count
-   from demanda.disciplina_cursada;
-   
-   assert disciplinas_cursadas_count = 14, 'Incorrect number of taken disciplines.';
-end$$;
+  DO $$
+  DECLARE 
+    disciplinas_cursadas_count INTEGER;
+  BEGIN
+    -- Counting the number of rows in demanda.disciplina_cursada
+    SELECT COUNT(*)
+    INTO disciplinas_cursadas_count
+    FROM demanda.disciplina_cursada;
 
+    -- Checking if the count matches the expected value
+    ASSERT disciplinas_cursadas_count = 14, 'Incorrect number of taken disciplines.';
+  END;
+  $$;
 
+-- Committing the transaction
 COMMIT;
 -- -- Cleaning the mess
 -- \c postgres;
