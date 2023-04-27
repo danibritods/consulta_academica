@@ -5,6 +5,7 @@
 DROP DATABASE IF EXISTS test_database;
 
 -- Creating the test database from the academico_db template and specifying the owner
+CREATE DATABASE test_database TEMPLATE academico_db OWNER tester;
 \c test_database;
 
 -- Starting a transaction
