@@ -1,7 +1,9 @@
 INSERT INTO alunos (id, curso_id, matriz_id) VALUES
 (1, 1, 1), --Daniel
 (2, 1, 1), --João
-(3, 1, 1); --José
+(3, 1, 1), --José
+--
+(4, 1, 1); --Test
 
 INSERT INTO disciplinas (id, sigla, nome, laboratorio_id, ano_semestre_inicio, ano_semestre_fim, horas_teorica, horas_pratica, horas_extra_classe, creditos, tipo_aprovacao) 
 VALUES
@@ -22,7 +24,9 @@ INSERT INTO disciplina_matrizes (id, matriz_id, disciplina_id, periodo_referenci
 (5, 1, 5, 1),
 (6, 1, 6, 1),
 (7, 1, 7, 1),
-(8, 1, 8, 1);
+(8, 1, 8, 1),
+--
+(9, 1, 9, 1);
 
 
 INSERT INTO pre_requisitos (pre_requisitante_id, pre_requisito_id) VALUES
@@ -38,7 +42,8 @@ INSERT INTO pre_requisitos (pre_requisitante_id, pre_requisito_id) VALUES
 INSERT INTO planos (id, aluno_id) VALUES
 (1, 1), --Daniel 
 (2, 2), --João
-(3, 3); --José
+(3, 3), --José
+(4, 4); --Test
 
 INSERT INTO inscricoes (id, plano_id, turma_id, situacao) VALUES
 (1, 1, 3, 'APR'),
@@ -56,7 +61,9 @@ INSERT INTO inscricoes (id, plano_id, turma_id, situacao) VALUES
 --
 (12, 3, 6, 'APR'),
 (13, 3, 7, 'APR'),
-(14, 3, 8, 'APR');
+(14, 3, 8, 'APR'),
+--
+(15, 4, 9, 'RPV');
 
 INSERT INTO turmas (id, disciplina_id) VALUES
  (1,1), --'Projeto de Monografia'),
@@ -66,5 +73,6 @@ INSERT INTO turmas (id, disciplina_id) VALUES
  (5,5), --'projmono_prereq1')
  (6,6), --'projmono_prereq2')
  (7,7), --'testsoft_prereq'),
- (8,8); --'metotrab_prereq');
+ (8,8), --'metotrab_prereq');
+ (9,9); --Test
 

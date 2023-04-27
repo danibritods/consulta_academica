@@ -24,6 +24,7 @@ BEGIN;
   DO $$
   DECLARE 
     disciplinas_cursadas_count INTEGER;
+    disciplinas_aprovadas_count INTEGER;
   BEGIN
     -- Counting the number of rows in demanda.disciplina_cursada
     SELECT COUNT(*)
@@ -31,7 +32,12 @@ BEGIN;
     FROM demanda.disciplina_cursada;
 
     -- Checking if the count matches the expected value
-    ASSERT disciplinas_cursadas_count = 14, 'Incorrect number of taken disciplines.';
+    ASSERT disciplinas_cursadas_count = 15, 'Incorrect number of taken subjects.';
+
+    SELECT COUNT(*)
+    INTO disciplinas_aprovadas_count  
+    FROM demanda.disciplina_aprovada;
+    ASSERT disciplinas_aprovadas_count = 14, 'Incorrect number of approved subjects.';
   END;
   $$;
 
