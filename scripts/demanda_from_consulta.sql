@@ -27,8 +27,10 @@ CREATE TABLE demanda.disciplina_remanescente AS (
 );
 
 --TODO: adicionar co-requisitos  
+--TODO: improve this logic. Maybe using a subquery. 
 CREATE TABLE demanda.disciplina_demandada AS (
-  SELECT r.aluno_id, r.disciplina_id 
+  SELECT DISTINCT ON (r.aluno_id, r.disciplina_id)
+    r.aluno_id, r.disciplina_id
   FROM demanda.disciplina_remanescente AS r
   LEFT JOIN consulta.pre_requisito AS pr 
     ON pr.pre_requisitante_id = r.disciplina_id
