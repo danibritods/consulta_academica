@@ -14,7 +14,9 @@ VALUES
 (5, 'INFtest1', 'projmono_prereq1', NULL,'', '', 0 ,0 ,0 ,0 ,''),
 (6, 'INFtest2', 'projmono_prereq2', NULL,'', '', 0 ,0 ,0 ,0 ,''),
 (7, 'INFtest3', 'testsoft_prereq', NULL,'', '', 0 ,0 ,0 ,0 ,''),
-(8, 'INFtest4', 'metotrab_prereq', NULL,'', '', 0 ,0 ,0 ,0 ,'');
+(8, 'INFtest4', 'metotrab_prereq', NULL,'', '', 0 ,0 ,0 ,0 ,''),
+--
+(9, 'Test', 'test', NULL,'', '', 0 ,0 ,0 ,0 ,'');
 
 INSERT INTO disciplina_matrizes (id, matriz_id, disciplina_id, periodo_referencia) VALUES
 (1, 1, 1, 1),
