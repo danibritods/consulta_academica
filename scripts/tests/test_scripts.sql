@@ -37,6 +37,13 @@ BEGIN;
     INTO disciplinas_aprovadas_count  
     FROM demanda.disciplina_aprovada;
     ASSERT disciplinas_aprovadas_count = 14, 'Incorrect number of approved subjects.';
+
+    ASSERT ( 3 = (
+        SELECT COUNT(*) 
+        FROM demanda.disciplina_remanescente 
+        WHERE aluno_id = 1
+        )), 'Should remain 3 subjects to student 1';
+
   END;
   $$;
 
