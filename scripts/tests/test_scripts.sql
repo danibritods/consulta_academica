@@ -49,6 +49,12 @@ BEGIN;
         FROM demanda.disciplina_demandada
         WHERE aluno_id = 1)
     ), 'Student 1 should demand 1, 2 and 9';
+
+    ASSERT (ARRAY[1,2,3,9]::bigint[] = ARRAY(
+        SELECT disciplina_id
+        FROM demanda.disciplina_demandada
+        WHERE aluno_id = 2)
+    ), 'Student 2 should demand 1, 2, 3 and 9';
   END;
   $$;
 
