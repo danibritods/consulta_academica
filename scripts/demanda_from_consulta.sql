@@ -27,8 +27,9 @@ CREATE TABLE demanda.disciplina_remanescente AS (
 );
 
 --TODO: adicionar co-requisitos  
+--TODO: Fix the error of conceding partial prerequisites 
 --TODO: test which implementation performs better
--- CREATE TABLE demanda.disciplina_demandada AS (
+-- CREATE TABLE demanda.disciplina_demandadaOG AS (
 --   SELECT DISTINCT ON (r.aluno_id, r.disciplina_id)
 --     r.aluno_id, r.disciplina_id
 --   FROM demanda.disciplina_remanescente AS r
