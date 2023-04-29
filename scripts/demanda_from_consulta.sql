@@ -2,7 +2,6 @@ CREATE SCHEMA IF NOT EXISTS demanda;
 
 --TODO: adicionar equivalências 
 --TODO: adicionar aproveitamento interno
-
 CREATE TABLE demanda.disciplina_cursada AS (
   SELECT a.id AS aluno_id, t.disciplina_id, i.situacao, i.nota
   FROM consulta.aluno AS a 
@@ -26,8 +25,21 @@ CREATE TABLE demanda.disciplina_remanescente AS (
   WHERE apr.disciplina_id IS NULL
 );
 
---TODO: adicionar co-requisitos  
---TODO: Fix the error of conceding partial prerequisites 
+--TODO: adicionar co-requisitos?  
+CREATE TABLE demanda.disciplina_demandada AS (
+  SELECT r.aluno_id, r.disciplina_id
+  FROM demanda.disciplina_remanescente AS r
+  WHERE ARRAY(
+    SELECT pr.pre_requisito_id 
+    FROM consulta.pre_requisito AS pr
+    WHERE pr.pre_requisitante_id = r.disciplina_id
+  ) <@ ARRAY(
+    SELECT apr.disciplina_id 
+    FROM demanda.disciplina_aprovada AS apr
+    WHERE apr.aluno_id = r.aluno_id
+  ));
+
+--TODO: Fix the error of conceding partial prerequisites in this implementation
 --TODO: test which implementation performs better
 -- CREATE TABLE demanda.disciplina_demandadaOG AS (
 --   SELECT DISTINCT ON (r.aluno_id, r.disciplina_id)
@@ -41,18 +53,6 @@ CREATE TABLE demanda.disciplina_remanescente AS (
 --   WHERE pr.pre_requisito_id IS NULL OR apr.disciplina_id IS NOT NULL
 -- );
 
-CREATE TABLE demanda.disciplina_demandada AS (
-  SELECT r.aluno_id, r.disciplina_id
-  FROM demanda.disciplina_remanescente AS r
-  WHERE ARRAY(
-    SELECT pr.pre_requisito_id 
-    FROM consulta.pre_requisito AS pr
-    WHERE pr.pre_requisitante_id = r.disciplina_id
-  ) <@ ARRAY(
-    SELECT apr.disciplina_id 
-    FROM demanda.disciplina_aprovada AS apr
-    WHERE apr.aluno_id = r.aluno_id
-  ));
 
 CREATE TABLE demanda.contagem_aluno_por_disciplina as (
   SELECT 
