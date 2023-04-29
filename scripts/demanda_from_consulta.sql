@@ -27,18 +27,31 @@ CREATE TABLE demanda.disciplina_remanescente AS (
 );
 
 --TODO: adicionar co-requisitos  
---TODO: improve this logic. Maybe using a subquery. 
+--TODO: test which implementation performs better
+-- CREATE TABLE demanda.disciplina_demandada AS (
+--   SELECT DISTINCT ON (r.aluno_id, r.disciplina_id)
+--     r.aluno_id, r.disciplina_id
+--   FROM demanda.disciplina_remanescente AS r
+--   LEFT JOIN consulta.pre_requisito AS pr 
+--     ON pr.pre_requisitante_id = r.disciplina_id
+--   LEFT JOIN demanda.disciplina_aprovada AS apr 
+--     ON apr.disciplina_id = pr.pre_requisito_id
+--     AND apr.aluno_id = r.aluno_id
+--   WHERE pr.pre_requisito_id IS NULL OR apr.disciplina_id IS NOT NULL
+-- );
+
 CREATE TABLE demanda.disciplina_demandada AS (
-  SELECT DISTINCT ON (r.aluno_id, r.disciplina_id)
-    r.aluno_id, r.disciplina_id
+  SELECT r.aluno_id, r.disciplina_id
   FROM demanda.disciplina_remanescente AS r
-  LEFT JOIN consulta.pre_requisito AS pr 
-    ON pr.pre_requisitante_id = r.disciplina_id
-  LEFT JOIN demanda.disciplina_aprovada AS apr 
-    ON apr.disciplina_id = pr.pre_requisito_id
-    AND apr.aluno_id = r.aluno_id
-  WHERE pr.pre_requisito_id IS NULL OR apr.disciplina_id IS NOT NULL
-);
+  WHERE ARRAY(
+    SELECT pr.pre_requisito_id 
+    FROM consulta.pre_requisito AS pr
+    WHERE pr.pre_requisitante_id = r.disciplina_id
+  ) <@ ARRAY(
+    SELECT apr.disciplina_id 
+    FROM demanda.disciplina_aprovada AS apr
+    WHERE apr.aluno_id = r.aluno_id
+  ));
 
 CREATE TABLE demanda.contagem_aluno_por_disciplina as (
   SELECT 
