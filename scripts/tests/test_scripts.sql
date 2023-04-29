@@ -61,6 +61,13 @@ BEGIN;
         FROM demanda.disciplina_demandada
         WHERE aluno_id = 3)
     ), 'Student 3 should demand 2, 3, 4, 5 and 9';
+
+    ASSERT (ARRAY[2,3,2,2,2,1,1,1,4]::bigint[] = ARRAY(
+        SELECT contagem_alunos
+        FROM demanda.contagem_aluno_por_disciplina 
+        ORDER BY disciplina_id)
+    ), 'Incorrect students demand count.';
+
   END;
   $$;
 
