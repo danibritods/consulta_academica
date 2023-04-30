@@ -2,7 +2,7 @@ CREATE SCHEMA IF NOT EXISTS demanda;
 
 --TODO: adicionar equivalências 
 --TODO: adicionar aproveitamento interno
-CREATE TABLE demanda.disciplina_cursada AS (
+CREATE VIEW demanda.disciplina_cursada AS (
   SELECT a.id AS aluno_id, t.disciplina_id, i.situacao, i.nota
   FROM consulta.aluno AS a 
   INNER JOIN consulta.plano AS p ON p.aluno_id = a.id
@@ -10,13 +10,13 @@ CREATE TABLE demanda.disciplina_cursada AS (
   INNER JOIN consulta.turma AS t ON t.id = i.turma_id
 );
 
-CREATE TABLE demanda.disciplina_aprovada AS (
+CREATE VIEW demanda.disciplina_aprovada AS (
   SELECT aluno_id, disciplina_id 
   FROM demanda.disciplina_cursada
   WHERE situacao = 'APR'
 );
 
-CREATE TABLE demanda.disciplina_remanescente AS ( 
+CREATE VIEW demanda.disciplina_remanescente AS ( 
   SELECT a.id AS aluno_id, m.disciplina_id
   FROM consulta.aluno AS a
   INNER JOIN consulta.disciplina_matriz AS m ON m.matriz_id = a.matriz_id
@@ -26,7 +26,7 @@ CREATE TABLE demanda.disciplina_remanescente AS (
 );
 
 --TODO: adicionar co-requisitos?  
-CREATE TABLE demanda.disciplina_demandada AS (
+CREATE VIEW demanda.disciplina_demandada AS (
   SELECT r.aluno_id, r.disciplina_id
   FROM demanda.disciplina_remanescente AS r
   WHERE ARRAY(
@@ -41,7 +41,7 @@ CREATE TABLE demanda.disciplina_demandada AS (
 
 --TODO: Fix the error of conceding partial prerequisites in this implementation
 --TODO: test which implementation performs better
--- CREATE TABLE demanda.disciplina_demandadaOG AS (
+-- CREATE VIEW demanda.disciplina_demandadaOG AS (
 --   SELECT DISTINCT ON (r.aluno_id, r.disciplina_id)
 --     r.aluno_id, r.disciplina_id
 --   FROM demanda.disciplina_remanescente AS r
@@ -53,8 +53,7 @@ CREATE TABLE demanda.disciplina_demandada AS (
 --   WHERE pr.pre_requisito_id IS NULL OR apr.disciplina_id IS NOT NULL
 -- );
 
-
-CREATE TABLE demanda.contagem_aluno_por_disciplina as (
+CREATE VIEW demanda.contagem_aluno_por_disciplina as (
   SELECT 
     disciplina_id,
     COUNT(aluno_id) AS contagem_alunos
