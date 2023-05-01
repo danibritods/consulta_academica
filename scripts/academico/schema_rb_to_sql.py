@@ -28,6 +28,10 @@ def table_parser(table):
     sql_table = f"CREATE TABLE {SCHEMA_NAME}.{table_name}(\n{columns}\n);\n"
     return sql_table
 
+def references_parser(column_name):
+    
+    return f"{column_name}s"
+
 def columns_parser(columns):
     substitution_dict = {
 
