@@ -1,4 +1,4 @@
-import schema_rb_to_sql as parser
+import academico.schema_rb_to_sql as parser
 
 def test_read_file():
     filepath = "tests/test.rb"
