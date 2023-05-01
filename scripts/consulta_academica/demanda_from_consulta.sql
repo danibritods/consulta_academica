@@ -62,3 +62,5 @@ CREATE VIEW demanda.contagem_aluno_por_disciplina as (
   GROUP BY 
     disciplina_id 
 );
+
+-- EXPLAIN ANALYZE SELECT * FROM demanda.contagem_aluno_por_disciplina;
