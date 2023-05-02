@@ -21,19 +21,18 @@ It is composed by a Postgres image with containing
 │   │   ├── consulta_from_academico.sql· · · · ·Script to generate the `consulta` schema views.  
 │   │   └── demanda_from_consulta.sql· · · · · ·Script to generate the `demanda` schema views.
 │   ├── off_the_rails · · · · · · · · · · · Ruby script to build the academico_db database and tables from `schema.rb`.
-│   │   ├── bin · · · · · · · · · · · · · · · · Binstubs' folder (executables around Ruby gems)
-│   │   ├── db· · · · · · · · · · · · · · · · · Database config files within the Ruby app 
+│   │   ├── bin · · · · · · · · · · · · · · · · Binstubs' folder (executables around Ruby gems).
+│   │   ├── db· · · · · · · · · · · · · · · · · Database config files within the Ruby script. 
 │   │   │   ├── config.yml· · · · · · · · · · · · · Configuration file for database settings and options.
 │   │   │   └── schema.rb · · · · · · · · · · · · · Ruby file that defines the structure of the database tables and columns.
 │   │   ├── Gemfile · · · · · · · · · · · · · · File that specifies the gem dependencies for the project.
 │   │   ├── Gemfile.lock  · · · · · · · · · · · File that records the exact versions of the gems installed for the project. 
 │   │   └── Rakefile· · · · · · · · · · · · · · File that defines tasks to run with the rake command. 
 │   ├── tests · · · · · · · · · · · · · · · Test cases. 
-│   │   ├── test_schema_rb_to_sql.py· · · · · Test cases for the rb -> SQL script. 
-│   │   └── test_scripts.sql· · · · · · · · · Test cases for the SQL scripts. 
-│   ├── consulta_from_academico.sql · · · Script to build the query database from Academico's db. 
-│   ├── create_demand.sql · · · · · · · · Script to generate each student's subject demand. 
-│   └── init.sh · · · · · · · · · · · · · Script to run the tests and build the databases. 
+│   │   ├── test_schema_rb_to_sql.py· · · · · · Test cases for the rb -> SQL script. 
+│   │   └── test_scripts.sql· · · · · · · · · · Test cases for the SQL scripts. 
+│   ├── init.sh · · · · · · · · · · · · · Script to run the tests and build the databases. 
+│   └── pg_init.sql · · · · · · · · · · · Script to create the the auto_academ role (used by the Ruby script)
 ├── docker-compose.yml· · · · · · · · · Docker-compose config file. 
 ├── Dockerfile-postgres.yml · · · · · · Postgres container's config file. 
 ├── Dockerfile-ruby.yml · · · · · · · · Ruby container's config file.
