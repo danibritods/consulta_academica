@@ -5,8 +5,8 @@ Integrate new query databases into UENF’s Academic System to offer new feature
 
 ## Structure 
 
-This repository is the development environment of the project. 
-It is composed by a Postgres image with containing 
+This repository contains the development environment for the **consulta_academica** project. It uses Docker Compose to orchestrate two docker images: one for Postgres, which provides the database service, and one for Ruby, which creates the database from the schema.rb file.
+
 ### Folder Structure
 ```md
 .
