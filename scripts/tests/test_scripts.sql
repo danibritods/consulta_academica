@@ -17,8 +17,8 @@ BEGIN;
 \i insert_mock_data.sql
 
 -- Running the scripts that create the `consulta` and `demanda` schemas
-\i ./../consulta_from_academico.sql
-\i ./../demanda_from_consulta.sql
+  \i ./../consulta_academica/consulta_from_academico.sql
+  \i ./../consulta_academica/demanda_from_consulta.sql
 
 -- Asserting that the output matches the expected data
   DO $$
