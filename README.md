@@ -3,7 +3,7 @@
 Integrate new query databases into UENF’s Academic System to offer new features such as automatically calculating the demand for each course's subjects. 
 
 ## About
-Academico is the system that manages the academic activities of UENF, such as courses, subjects, enrollments, grades, etc. However, the production database of Academico is not suitable for data analysis and feature development, as it contains sensitive and irrelevant data that may compromise the privacy and performance of the system. Therefore, consulta_academica was created to address this issue.
+[Academico][academico_url] is the system that manages the academic activities of UENF, such as courses, subjects, enrollments, grades, etc. However, the production database of Academico is not suitable for data analysis and feature development, as it contains sensitive and irrelevant data that may compromise the privacy and performance of the system. Therefore, consulta_academica was created to address this issue.
 
 ## Structure 
 
@@ -34,3 +34,5 @@ This repository contains the development environment for the **consulta_academic
 ├── Dockerfile-ruby.yml · · · · · · · · Ruby container's config file.
 └── README.md · · · · · · · · · · · · · Project presentation. This file!  
 ```
+
+[academico_url]: https://academico.uenf.br/
