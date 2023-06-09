@@ -3,7 +3,9 @@
 consulta_academica is a project to build the foundations for data analysis and data features within [UENF][uenf_url]'s Academic System ("[Academico][academico_url]").
 
 ## About
-[Academico][academico_url] is the system that manages the academic activities of the Universidade Estadual do Norte Fluminense (UENF), such as courses, subjects, enrollments, grades, etc. However, the production database of Academico is not suitable for data analysis and data features, as it contains sensitive and irrelevant data that may compromise the privacy and performance of the system. Therefore, consulta_academica was created to address this issue. 
+
+[Academico][academico_url] is the system that manages the academic activities of the Universidade Estadual do Norte Fluminense (UENF), such as courses, subjects, enrollments, grades, etc. However, the production database of Academico is not suitable for data analysis and data features, as it contains sensitive and irrelevant data that may compromise the privacy and performance of the system. Therefore, consulta_academica was created to address this issue. Our main goal is to build an anonymized and abstracted database that will allow easy development of data routines and features contributing to a data driven culture in our university. 
+
 
 ## Structure 
 
