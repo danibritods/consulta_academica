@@ -35,4 +35,5 @@ This repository contains the development environment for the **consulta_academic
 └── README.md · · · · · · · · · · · · · Project presentation. This file!  
 ```
 
+[uenf_url]: https://uenf.br/
 [academico_url]: https://academico.uenf.br/
