@@ -26,7 +26,7 @@ This repository contains the development environment for the **consulta_academic
 ├── data · · · · · · · · · · · · · · · ·Postgres folder (docker-compose volume).
 ├── scripts · · · · · · · · · · · · · · Script's folder, synced with images (docker-compose volume).
 │   ├── **consulta_academica** · · · · · · ·Main project folder. 
-│   │   ├── consulta_from_academico.sql· · · · ·Script to generate the `consulta` schema views.  
+│   │   ├── consulta_from_academico.sql· · · · ·Script to generate the `consulta` database.  
 │   │   └── demanda_from_consulta.sql· · · · · ·Script to generate the `demanda` schema views.
 │   ├── off_the_rails · · · · · · · · · · · Ruby script to build the academico_db database and tables from `schema.rb`.
 │   │   ├── bin · · · · · · · · · · · · · · · · Binstubs' folder (executables around Ruby gems).
@@ -48,3 +48,39 @@ This repository contains the development environment for the **consulta_academic
 
 [uenf_url]: https://uenf.br/
 [academico_url]: https://academico.uenf.br/
+
+.
+├──data  [error opening dir]
+├──docker-compose.yml
+├──Dockerfile-postgres
+├──Dockerfile-ruby
+├──README.md
+└──scripts
+├── consulta_academica
+│   ├── consulta_from_academico.sql
+│   └── demanda_from_consulta.sql
+├── init.sh
+├── off_the_rails
+│   ├── bin
+│   │   ├── bundle
+│   │   ├── nokogiri
+│   │   ├── racc
+│   │   ├── rackup
+│   │   ├── rails
+│   │   ├── rake
+│   │   └── thor
+│   ├── db
+│   │   ├── config.yml
+│   │   └── schema.rb
+│   ├── Gemfile
+│   ├── Gemfile.lock
+│   └── Rakefile
+├── pg_init.sql
+├── __pycache__
+├── temp.ipynb
+├── TEMP.sql
+└── tests
+    ├── __init__.py
+    ├── insert_mock_data.sql
+    ├── __pycache__
+    └── test_scripts.sql

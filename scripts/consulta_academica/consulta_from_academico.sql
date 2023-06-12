@@ -9,18 +9,18 @@ CREATE SCHEMA IF NOT EXISTS consulta;
 -- as matérias com pessoas quase se formando, critérios técnicos de priorização, etc.
 -- eventualmente permitir calcular quais matérias vão contribuir mais para o avanço e colação de grau dos alunos.
 -- TODO: considerar se area_de_concentracao_id e linha_de_pesquisa_id seriam interessantes nesse contexto.
-CREATE VIEW consulta.aluno AS (
+CREATE TABLE consulta.aluno AS (
     SELECT id, curso_id, matriz_id
     FROM alunos
 );
 
-CREATE VIEW consulta.disciplina_matriz AS (
+CREATE TABLE consulta.disciplina_matriz AS (
   SELECT id, matriz_id, disciplina_id, periodo_referencia, area_de_concentracao_id
   FROM disciplina_matrizes
 );
 
 -- TODO: perguntar se é 1 para 1 com sigla
-CREATE VIEW consulta.disciplina AS (
+CREATE TABLE consulta.disciplina AS (
   SELECT
     id,
     sigla,
@@ -36,27 +36,27 @@ CREATE VIEW consulta.disciplina AS (
   FROM disciplinas 
 );
 
-CREATE VIEW consulta.inscricao AS (
+CREATE TABLE consulta.inscricao AS (
   SELECT id, plano_id, turma_id, situacao, faltas, nota_ef, nota
   FROM inscricoes
 );
 
-CREATE VIEW consulta.turma AS (
+CREATE TABLE consulta.turma AS (
   SELECT id, codigo, disciplina_id, ano_semestre 
   FROM turmas
 ); 
 
-CREATE VIEW consulta.plano AS (
+CREATE TABLE consulta.plano AS (
   SELECT id, ano_semestre, aluno_id
   FROM planos 
 );
 
-CREATE VIEW consulta.pre_requisito AS (
+CREATE TABLE consulta.pre_requisito AS (
   SELECT pre_requisitante_id, pre_requisito_id
   FROM pre_requisitos
 );
 
-CREATE VIEW consulta.co_resuisito AS (
+CREATE TABLE consulta.co_resuisito AS (
   SELECT co_requisitante_id, co_requisito_id
   FROM co_requisitos
 );
