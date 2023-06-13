@@ -1,18 +1,8 @@
 CREATE SCHEMA IF NOT EXISTS demanda;
 
---TODO: adicionar equivalências 
---TODO: adicionar aproveitamento interno
-CREATE VIEW demanda.disciplina_cursada AS (
-  SELECT a.id AS aluno_id, t.disciplina_id, i.situacao, i.nota
-  FROM consulta.aluno AS a 
-  INNER JOIN consulta.plano AS p ON p.aluno_id = a.id
-  INNER JOIN consulta.inscricao AS i ON i.plano_id = p.id
-  INNER JOIN consulta.turma AS t ON t.id = i.turma_id
-);
-
 CREATE VIEW demanda.disciplina_aprovada AS (
   SELECT aluno_id, disciplina_id 
-  FROM demanda.disciplina_cursada
+  FROM consulta.disciplina_cursada
   WHERE situacao = 'APR'
 );
 

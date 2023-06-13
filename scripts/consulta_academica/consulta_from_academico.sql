@@ -36,6 +36,8 @@ CREATE TABLE consulta.disciplina AS (
   FROM disciplinas 
 );
 
+
+
 CREATE TABLE consulta.inscricao AS (
   SELECT id, plano_id, turma_id, situacao, faltas, nota_ef, nota
   FROM inscricoes
@@ -59,4 +61,14 @@ CREATE TABLE consulta.pre_requisito AS (
 CREATE TABLE consulta.co_resuisito AS (
   SELECT co_requisitante_id, co_requisito_id
   FROM co_requisitos
+);
+
+--TODO: adicionar equivalências 
+--TODO: adicionar aproveitamento interno
+CREATE TABLE consulta.disciplina_cursada AS (
+  SELECT a.id AS aluno_id, t.disciplina_id, i.situacao, i.nota
+  FROM consulta.aluno AS a 
+  INNER JOIN consulta.plano AS p ON p.aluno_id = a.id
+  INNER JOIN consulta.inscricao AS i ON i.plano_id = p.id
+  INNER JOIN consulta.turma AS t ON t.id = i.turma_id
 );
