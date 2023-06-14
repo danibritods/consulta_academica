@@ -1,6 +1,7 @@
 # Academico database notes
 
-## subjects and its equivalences 
+## Subjects and its equivalences 
+### Entity relationship model
 - inscricoes(id, plano_id, turma_id, situacao, faltas, nota_ef, nota) 
   - planos(id, ano_semestre, aluno_id)
   - turmas(id, codigo, disciplina_id, ano_semestre)
@@ -23,3 +24,5 @@
     - inscricao_id, 
     - **disciplina_id**,
     - participacao_id)
+
+### Rationale 
