@@ -38,3 +38,14 @@
   - **valor**)
 
 ### Rationale 
+- `disciplina_id` is the main object 
+
+- `inscricoes` is the main course to take a subject
+  - (inscricoes -> turmas -> disciplinas)
+- `participacoes` is the alternative way to take a subject
+  - (participacoes -> atividades -> disciplinas)
+- There are four ways of completing a specific subject without taking it:
+  - `equivalencias_a_pedido`
+  - `aproveitamentos_internos` 
+  - `isencoes`
+  - `transferencia_externa`
