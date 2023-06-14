@@ -9,6 +9,7 @@
 - participacoes(id, aluno_id, atividade_id, faltas, nota, satisfatoria_em, insatisfatoria_em)
   - atividades(id, disciplina_id, descricao, ano_semestre)
 
+
 - equivalencias(equivalida_id, equivalente_id)
 
 - equivalencias_a_pedido(id, aluno_id, ano_semestre)
@@ -20,9 +21,20 @@
 
 - aproveitamentos_internos(id, aluno_id, ano_semestre)
   - itens_aproveitamento_interno(
-    - aproveitamento_interno_id,
+    - **aproveitamento_interno_id**,
     - inscricao_id, 
     - **disciplina_id**,
     - participacao_id)
+
+- aproveitamentos_de_atividade(id, **aluno_id**, **participacao_id**)
+
+- isencoes(id, **aluno_id**, **ano_semestre**)
+  - disciplinas_itens_isencao(id, disciplina_id, item_isencao_id)
+  - itens_isencao(id, isencao_id)
+
+- itens_transferencia_externa(
+  - **transferencia_externa_id**
+  - **nome**
+  - **valor**)
 
 ### Rationale 
