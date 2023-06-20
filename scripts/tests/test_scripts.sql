@@ -29,7 +29,7 @@ BEGIN;
     -- Checking the number of rows in demanda.disciplina_cursada
     SELECT COUNT(*)
     INTO disciplinas_cursadas_count
-    FROM demanda.disciplina_cursada;
+    FROM consulta.disciplina_cursada;
     ASSERT disciplinas_cursadas_count = 15, 'Incorrect number of taken subjects.';
 
     -- Checking the number of rows in demanda.disciplina_aprovadas
