@@ -56,10 +56,15 @@ CREATE TABLE consulta.co_resuisito AS (
 
 --TODO: adicionar equivalências 
 --TODO: adicionar aproveitamento interno
-CREATE TABLE consulta.disciplina_cursada AS (
+CREATE TABLE consulta.disciplina_cursada_inscricao AS (
   SELECT a.id AS aluno_id, t.disciplina_id, i.situacao, i.nota
   FROM consulta.aluno AS a 
   INNER JOIN consulta.plano AS p ON p.aluno_id = a.id
   INNER JOIN consulta.inscricao AS i ON i.plano_id = p.id
   INNER JOIN consulta.turma AS t ON t.id = i.turma_id
+);
+
+CREATE TABLE consulta.disciplina_cursada AS (
+  SELECT aluno_id, disciplina_id, situacao, nota  
+  FROM consulta.disciplina_cursada_inscricao
 );
