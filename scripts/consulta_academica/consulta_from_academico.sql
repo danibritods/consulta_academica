@@ -65,6 +65,6 @@ CREATE TABLE consulta.disciplina_cursada_inscricao AS (
 );
 
 CREATE TABLE consulta.disciplina_cursada AS (
-  SELECT aluno_id, disciplina_id, situacao, nota  
+  SELECT aluno_id, disciplina_id, situacao, nota, 'inscricao' AS origem
   FROM consulta.disciplina_cursada_inscricao
 );
