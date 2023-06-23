@@ -44,6 +44,17 @@ CREATE TABLE consulta.plano AS (
   FROM planos 
 );
 
+CREATE TABLE consulta.participacao AS (
+  SELECT id, aluno_id, atividade_id, faltas, nota, satisfatoria_em, insatisfatoria_em
+  FROM participacoes 
+);
+
+CREATE TABLE consulta.atividade AS (
+  SELECT id, disciplina_id, descricao, ano_semestre
+  FROM atividades
+);
+
+
 CREATE TABLE consulta.pre_requisito AS (
   SELECT pre_requisitante_id, pre_requisito_id
   FROM pre_requisitos
@@ -53,6 +64,19 @@ CREATE TABLE consulta.co_resuisito AS (
   SELECT co_requisitante_id, co_requisito_id
   FROM co_requisitos
 );
+
+
+CREATE TABLE consulta.equivalencia_a_pedido AS (
+  SELECT id, aluno_id, ano_semestre
+  FROM equivalencias_a_pedido
+); 
+
+CREATE TABLE consulta.item_equivalencia_a_pedido AS (
+  SELECT equivalencia_a_pedido_id, inscricao_id, disciplina_id, participacao_id
+  FROM itens_equivalencia_a_pedido
+);
+
+
 
 --TODO: adicionar equivalências 
 --TODO: adicionar aproveitamento interno
