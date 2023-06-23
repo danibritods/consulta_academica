@@ -88,6 +88,14 @@ CREATE TABLE consulta.disciplina_cursada_inscricao AS (
   INNER JOIN consulta.turma AS t ON t.id = i.turma_id
 );
 
+CREATE TABLE consulta.disciplina_cursada_equivalencia_pedido AS (
+  SELECT ep.aluno_id, ep.ano_semestre, i_ep.disciplina_id, 'APR' AS situacao, COALESCE(p.nota, i.nota) AS nota
+  FROM consulta.equivalencia_a_pedido AS ep 
+  INNER JOIN consulta.item_equivalencia_a_pedido AS i_ep ON i_ep.equivalencia_a_pedido_id = ep.id
+  LEFT JOIN consulta.participacao AS p ON p.id = i_ep.participacao_id 
+  LEFT JOIN consulta.inscricao AS i ON i.id = i_ep.inscricao_id
+);
+
 CREATE TABLE consulta.disciplina_cursada AS (
   SELECT aluno_id, disciplina_id, situacao, nota, 'inscricao' AS origem
   FROM consulta.disciplina_cursada_inscricao
