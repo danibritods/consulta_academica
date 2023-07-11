@@ -68,6 +68,13 @@ BEGIN;
         ORDER BY disciplina_id)
     ), 'Incorrect students demand count.';
 
+--   EXCEPTION
+--     -- Handling any errors that may occur
+--     WHEN others THEN
+--       -- Rolling back the transaction
+--       ROLLBACK;
+--       -- Raising a custom error message with details
+--       RAISE 'An error occurred while testing demanda schema: %', SQLERRM;
   END;
   $$;
 
