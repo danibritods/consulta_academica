@@ -4,8 +4,8 @@ development:
   encoding: utf8
   host: db
   port: 5432
-  username: auto_academ
-  password: auto_academ
+  username: auto_academ #$ {DB_USER}
+  password: auto_academ #$ {DB_PASSWORD}
 
 # test:
 #   adapter: sqlite3
