@@ -10,7 +10,6 @@ CREATE TABLE consulta.disciplina_matriz AS (
   FROM disciplina_matrizes
 );
 
--- TODO: perguntar se é 1 para 1 com sigla
 CREATE TABLE consulta.disciplina AS (
   SELECT
     id,
@@ -28,21 +27,19 @@ CREATE TABLE consulta.disciplina AS (
 );
 
 
-
 CREATE TABLE consulta.inscricao AS (
   SELECT id, plano_id, turma_id, situacao, faltas, nota_ef, nota
   FROM inscricoes
 );
-
 CREATE TABLE consulta.turma AS (
   SELECT id, codigo, disciplina_id, ano_semestre 
   FROM turmas
 ); 
-
 CREATE TABLE consulta.plano AS (
   SELECT id, ano_semestre, aluno_id
   FROM planos 
 );
+
 
 CREATE TABLE consulta.participacao AS (
   SELECT id, aluno_id, atividade_id, faltas, nota, satisfatoria_em, insatisfatoria_em

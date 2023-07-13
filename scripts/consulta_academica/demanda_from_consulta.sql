@@ -6,6 +6,7 @@ CREATE VIEW demanda.disciplina_aprovada AS (
   WHERE situacao = 'APR'
 );
 
+
 CREATE VIEW demanda.disciplina_remanescente AS ( 
   SELECT a.id AS aluno_id, m.disciplina_id
   FROM consulta.aluno AS a
@@ -28,6 +29,16 @@ CREATE VIEW demanda.disciplina_demandada AS (
     FROM demanda.disciplina_aprovada AS apr
     WHERE apr.aluno_id = r.aluno_id
   ));
+  
+CREATE VIEW demanda.contagem_aluno_por_disciplina as (
+  SELECT 
+    disciplina_id,
+    COUNT(aluno_id) AS contagem_alunos
+  FROM
+    demanda.disciplina_demandada 
+  GROUP BY 
+    disciplina_id 
+);
 
 --TODO: Fix the error of conceding partial prerequisites in this implementation
 --TODO: test which implementation performs better
@@ -43,14 +54,5 @@ CREATE VIEW demanda.disciplina_demandada AS (
 --   WHERE pr.pre_requisito_id IS NULL OR apr.disciplina_id IS NOT NULL
 -- );
 
-CREATE VIEW demanda.contagem_aluno_por_disciplina as (
-  SELECT 
-    disciplina_id,
-    COUNT(aluno_id) AS contagem_alunos
-  FROM
-    demanda.disciplina_demandada 
-  GROUP BY 
-    disciplina_id 
-);
 
 -- EXPLAIN ANALYZE SELECT * FROM demanda.contagem_aluno_por_disciplina;
