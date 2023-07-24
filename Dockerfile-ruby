@@ -1,4 +1,4 @@
 FROM ruby
 WORKDIR /app
-# RUN bundle install && rake db:create && rake db:schema:load
-# CMD ["ruby", "app.rb"]
+COPY ./scripts/off_the_rails /app
+RUN bundle install 
