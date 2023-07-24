@@ -10,6 +10,14 @@ services:
       - ./scripts:/home/scripts
     ports:
       - "5432:5432"
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
   ruby:
     build: 
       dockerfile: Dockerfile-ruby
@@ -18,3 +26,11 @@ services:
     command: bash -c "rake db:create && rake db:schema:load"
     volumes:
       - ./scripts/off_the_rails:/app
+
+  python:
+    build:
+      dockerfile: Dockerfile-python
+    depends_on:
+      - ruby
+    volumes:
+      - ./scripts/rabbitmq:/rabbitmq
