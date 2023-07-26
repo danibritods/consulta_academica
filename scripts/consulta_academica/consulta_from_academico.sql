@@ -1,6 +1,6 @@
 DROP SCHEMA IF EXISTS consulta CASCADE;
 CREATE SCHEMA IF NOT EXISTS consulta;
-CREATE ROLE query_consulta PASSWORD 'query_consulta'
+CREATE ROLE query_consulta PASSWORD 'query_consulta';
 GRANT USAGE ON SCHEMA consulta TO query_consulta;
 ALTER DEFAULT PRIVILEGES IN SCHEMA consulta GRANT SELECT ON TABLES TO query_consulta;
 
