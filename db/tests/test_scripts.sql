@@ -1,6 +1,3 @@
--- This scrips tests the scripts that create `consulta` and `demanda` schemas 
--- This file is meant to be run by init.sh from the /home/scripts/tests.
-
 -- Dropping the test database if it exists
 DROP DATABASE IF EXISTS test_database;
 
@@ -13,14 +10,14 @@ CREATE DATABASE test_database TEMPLATE academico_db OWNER tester;
 -- Starting a transaction
 BEGIN;
 
--- Inserting the mock data
-\i insert_mock_data.sql
+  -- Inserting the mock data
+  \i insert_mock_data.sql
 
--- Running the scripts that create the `consulta` and `demanda` schemas
+  -- Running the scripts that create the `consulta` and `demanda` schemas
   \i ./../consulta_academica/consulta_from_academico.sql
   \i ./../consulta_academica/demanda_from_consulta.sql
-
--- Asserting that the output matches the expected data
+  -- \d+ consulta.disciplina_cursada_ou_aproveitada
+  -- Asserting that the output matches the expected data
   DO $$
   DECLARE 
     disciplinas_cursadas_count INTEGER;
@@ -81,6 +78,6 @@ BEGIN;
 -- Committing the transaction
 COMMIT;
 -- -- Cleaning the mess
--- \c postgres;
 -- ROLLBACK;
+-- \c postgres;
 -- DROP DATABASE test_dabase;

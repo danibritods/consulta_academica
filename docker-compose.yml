@@ -3,13 +3,22 @@ version: '3.7'
 services:
   db:
     build:
-      dockerfile: Dockerfile-postgres
+      context: ./db
     restart: always
     volumes:
-      - ./data:/var/lib/postgresql/data
-      - ./scripts:/home/scripts
+      - ./db/data:/var/lib/postgresql/data
+      - ./db/scripts:/home/scripts
     ports:
       - "5432:5432"
+
+  ruby:
+    build: 
+      context: ./off_the_rails
+    depends_on:
+      - db
+    command: bash -c "rake db:create && rake db:schema:load"
+    volumes:
+      - ./off_the_rails/app:/app
 
   rabbitmq:
     image: rabbitmq:management
@@ -18,19 +27,10 @@ services:
       - "5672:5672"
       - "15672:15672"
 
-  ruby:
-    build: 
-      dockerfile: Dockerfile-ruby
-    depends_on:
-      - db
-    command: bash -c "rake db:create && rake db:schema:load"
-    volumes:
-      - ./scripts/off_the_rails:/app
-
   python:
     build:
-      dockerfile: Dockerfile-python
+      context: ./python
     depends_on:
       - ruby
     volumes:
-      - ./scripts/rabbitmq:/rabbitmq
+      - ./python/:/python

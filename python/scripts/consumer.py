@@ -45,7 +45,7 @@ def _row_to_db(row):
 def _row_to_insert_query(row):
         table_name = row.get("table_name")
         columns = ", ".join(row.keys())
-        values = tuple(row.values())
+        values = row.values()
 
         query = f"INSERT INTO {table_name} ({columns}) VALUES ({ '?, ' * len(values)}))"
         return (query,values)

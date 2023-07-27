@@ -1,9 +1,9 @@
 FROM python:3
 
-COPY scripts/rabbitmq/requirements.txt .
+COPY ./requirements.txt .
 
 RUN pip install -r requirements.txt
 
 CMD ["tail", "-f", "/dev/null"]
 
-WORKDIR /rabbitmq
+WORKDIR /python
