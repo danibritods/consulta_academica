@@ -33,4 +33,4 @@ services:
     depends_on:
       - ruby
     volumes:
-      - ./python/:/python
+      - ./python/app:/app
