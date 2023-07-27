@@ -1,4 +1,4 @@
 FROM ruby
 WORKDIR /app
-COPY ./scripts/off_the_rails /app
+COPY ./app /app
 RUN bundle install 

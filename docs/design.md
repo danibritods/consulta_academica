@@ -1,0 +1,1 @@
+- use singular in table names created withing this project 
