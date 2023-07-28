@@ -1,9 +1,8 @@
-FROM python:3
+FROM python:3.10-slim
+WORKDIR /app
 
-COPY ./requirements.txt .
-
+WORKDIR /python
+COPY ./app/requirements.txt .
 RUN pip install -r requirements.txt
 
 CMD ["tail", "-f", "/dev/null"]
-
-WORKDIR /python
