@@ -21,8 +21,5 @@ rows = cur.fetchall()
 for row in rows:
     print(row)
 
-cur.execute("/! pwd; ls")
-
-
 cur.close()
 conn.close()
