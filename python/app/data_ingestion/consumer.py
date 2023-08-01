@@ -27,7 +27,8 @@ def connect_to_db():
     )
     cur = conn.cursor()
     return conn, cur
-conn, cur = connect_to_db()
+
+
 
 def connect_to_queue():
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq'))
@@ -52,12 +53,15 @@ def message_to_db(body):
                             {"table_name":'table',"id":2,"col1":1,"col2":2,"col3":3}
                             {"table_name":'table',"id":2,"col1":1,"col2":2,"col3":3}]
     """
-    rows = json.loads(body)
+    global conn
+    
+    rows = body_to_rows(body)
     consume(map(_row_to_db,rows))
     conn.commit()
 
 def _row_to_db(row):
-    cur.executemany(*_row_to_insert_query(row))
+    global cur
+    cur.execute(*_row_to_insert_query(row))
     #check faster implementations: https://stackoverflow.com/questions/8134602/psycopg2-insert-multiple-rows-with-one-query
 
 def _row_to_insert_query(row):
@@ -66,13 +70,13 @@ def _row_to_insert_query(row):
         columns = ", ".join( tuple(row.keys())[1:] )
         values = tuple(row.values())[1:]
 
-        query = f"INSERT INTO {table_name} ({columns}) VALUES ({ '%s, ' * len(values)}))"
+        query = f"INSERT INTO {table_name} ({columns}) VALUES ({ ', '.join(['%s'] * len(values)) })"
         return (query,values)
 
 
 def main():
     logging.getLogger().setLevel(logging.INFO)
-
+    conn, cur = connect_to_db()
     channel = connect_to_queue()
     try:
         print(' [*] Waiting for messages. To exit press CTRL+C')
