@@ -5,6 +5,18 @@ from collections import deque
 import json
 import logging
 
+# Itertools recipe. Used here to implement efficiently apply a function to a list
+def consume(iterator, n=None):
+    "Advance the iterator n-steps ahead. If n is None, consume entirely."
+    # Use functions that consume iterators at C speed.
+    if n is None:
+        # feed the entire iterator into a zero-length deque
+        deque(iterator, maxlen=0)
+    else:
+        # advance to the empty slice starting at position n
+        next(islice(iterator, n, n), None)
+
+
 def connect_to_db():
     conn = psycopg2.connect(
         host="db",
@@ -26,33 +38,19 @@ def connect_to_queue():
 
     return channel
 
+
 def callback_data_to_db(ch, method, properties, body):
     logging.info(f"callback_data_to_db: message received : {body}")
     message_to_db(body)
-    rows = cur.fetchall()
-
-    for row in rows:
-        print(row)
-
-
-
-def consume(iterator, n=None):
-    "Advance the iterator n-steps ahead. If n is None, consume entirely."
-    # Use functions that consume iterators at C speed.
-    if n is None:
-        # feed the entire iterator into a zero-length deque
-        deque(iterator, maxlen=0)
-    else:
-        # advance to the empty slice starting at position n
-        next(islice(iterator, n, n), None)
-
-
+    # rows = cur.fetchall()
+    # for row in rows:
+    #     print(row)
 
 def message_to_db(body):
     """
-    body example = [{"table_name":'table',"id":1,"col1":1,"col2":2,"col3":3},
-                    {"table_name":'table',"id":2,"col1":1,"col2":2,"col3":3}
-                    {"table_name":'table',"id":2,"col1":1,"col2":2,"col3":3}]
+    body expected format = [{"table_name":'table',"id":1,"col1":1,"col2":2,"col3":3},
+                            {"table_name":'table',"id":2,"col1":1,"col2":2,"col3":3}
+                            {"table_name":'table',"id":2,"col1":1,"col2":2,"col3":3}]
     """
     rows = json.loads(body)
     consume(map(_row_to_db,rows))
@@ -70,6 +68,7 @@ def _row_to_insert_query(row):
 
         query = f"INSERT INTO {table_name} ({columns}) VALUES ({ '%s, ' * len(values)}))"
         return (query,values)
+
 
 def main():
     logging.getLogger().setLevel(logging.INFO)
