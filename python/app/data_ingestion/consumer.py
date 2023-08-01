@@ -59,6 +59,21 @@ def message_to_db(body):
     consume(map(_row_to_db,rows))
     conn.commit()
 
+def body_to_rows(body):
+    if b"table_name" not in body:
+        logging.warning(f"|body_to_rows|Incorrect body format|{body}|\n")
+        return ()
+    try: 
+        rows = json.loads(body)
+        if type(rows) == list:
+            return rows
+        return (rows,)
+    except json.JSONDecodeError:
+        logging.warning(f"|body_to_rows|JSONDecodeError|{body}|\n")
+        return ()
+
+        
+
 def _row_to_db(row):
     global cur
     cur.execute(*_row_to_insert_query(row))
