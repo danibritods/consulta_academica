@@ -9,7 +9,12 @@ def test_row_to_insert_query_values():
 
 def test_row_to_insert_query():
     test_body = c.json.loads(b'{ "table_name":"alunos", "id":1, "curso_id":1, "matriz_id":1}')
-    expected = "INSERT INTO alunos (id, curso_id, matriz_id) VALUES (%s, %s, %s)"
+    expected = """
+        INSERT INTO alunos (id, curso_id, matriz_id)
+        VALUES (%s, %s, %s)
+        ON CONFLICT DO NOTHING
+        """
+
     obtained = c._row_to_insert_query(test_body)[0]
 
     assert obtained == expected

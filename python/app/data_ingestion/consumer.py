@@ -81,7 +81,11 @@ def _row_to_insert_query(row):
         columns = ", ".join( tuple(row.keys())[1:] )
         values = tuple(row.values())[1:]
 
-        query = f"INSERT INTO {table_name} ({columns}) VALUES ({ ', '.join(['%s'] * len(values)) })"
+        query = f"""
+        INSERT INTO {table_name} ({columns})
+        VALUES ({ ', '.join(['%s'] * len(values)) })
+        ON CONFLICT DO NOTHING
+        """
         return (query,values)
 
 
