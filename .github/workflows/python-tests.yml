@@ -16,14 +16,13 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    # Set the working directory for the whole job
+    defaults:
+      run:
+        working-directory: ./python/app
 
     steps:
-    
-    - name: Checkout the repo
-      uses: actions/checkout@v3
-      with:
-        path: ./python/app # Checkout only this subdirectory
-
+    - uses: actions/checkout@v3
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -41,4 +40,4 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest
+        pytest .
