@@ -1,4 +1,4 @@
-import psycopg2
+import database
 import pika
 from itertools import islice
 from collections import deque
@@ -17,15 +17,6 @@ def consume(iterator, n=None):
         next(islice(iterator, n, n), None)
 
 
-def connect_to_db():
-    conn = psycopg2.connect(
-        host="db",
-        port=5432,
-        user="auto_academ",
-        password="auto_academ",
-        database="academico_db"
-    )
-    return conn
 
 
 def connect_to_queue():
@@ -69,7 +60,7 @@ def body_to_rows(body):
         
 
 def _row_to_db(row):
-    with connect_to_db() as conn:
+    with database.connect_to_db() as conn:
         with conn.cursor() as cur:
             cur.execute(*_row_to_insert_query(row))
             conn.commit()
