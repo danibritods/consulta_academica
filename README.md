@@ -1,4 +1,6 @@
 # consulta_academica
+![Unit Tests](https://github.com/danibritods/consulta_academica/actions/workflows/python-tests.yml/badge.svg)
+
 
 consulta_academica is a project to build the foundations for data analysis and data features within [UENF][uenf_url]'s Academic System ("[Academico][academico_url]").
 
