@@ -1,4 +1,4 @@
-import database
+from data_ingestion import database
 import pika
 from itertools import islice
 from collections import deque
@@ -54,7 +54,11 @@ def body_to_rows(body):
             return rows
         return (rows,)
     except json.JSONDecodeError:
+        #todo: check possibility of detailing the exception type
         logging.warning(f"|body_to_rows|JSONDecodeError|{body}|\n")
+        return ()
+    except TypeError:
+        logging.warning(f"|body_to_rows|TypeError|{body}|\n")
         return ()
 
         
