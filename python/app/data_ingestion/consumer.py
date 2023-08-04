@@ -6,7 +6,7 @@ import json
 import logging
 
 # Itertools recipe. Used here to efficiently apply a function to a list
-def consume(iterator, n=None):
+def consume_iterator(iterator, n=None):
     "Advance the iterator n-steps ahead. If n is None, consume entirely."
     # Use functions that consume iterators at C speed.
     if n is None:
@@ -26,8 +26,14 @@ def connect_to_queue():
     channel.queue_declare(queue='data_to_db')
     channel.basic_consume(queue='data_to_db', on_message_callback=callback_data_to_db, auto_ack=True)
 
+    channel.queue_declare(queue='test')
+    channel.basic_consume(queue='test', on_message_callback=callback_test, auto_ack=True)
+
+
     return channel
 
+def callback_test(ch, method, properties, body):
+    print(ch, method, properties, body)
 
 def callback_data_to_db(ch, method, properties, body):
     logging.info(f"callback_data_to_db: message received : {body}")
@@ -42,7 +48,7 @@ def message_to_db(body):
     """
     
     rows = body_to_rows(body)
-    consume(map(_row_to_db,rows))
+    consume_iterator(map(_row_to_db,rows))
 
 def body_to_rows(body):
     if b"table_name" not in body:
@@ -83,15 +89,19 @@ def _row_to_insert_query(row):
         """
         return (query,values)
 
-
-def main():
-    logging.getLogger().setLevel(logging.INFO)
+def consume_queue():
     channel = connect_to_queue()
     try:
         print(' [*] Waiting for messages. To exit press CTRL+C')
         channel.start_consuming()
     except KeyboardInterrupt:
         channel.stop_consuming()
+
+
+def main():
+    logging.getLogger().setLevel(logging.INFO)
+    consume_queue()
+
 
 if __name__ == "__main__":
     main()
