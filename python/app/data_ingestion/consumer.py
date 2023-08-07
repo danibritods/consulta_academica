@@ -26,9 +26,8 @@ def connect_to_queue():
     channel.queue_declare(queue='data_to_db')
     channel.basic_consume(queue='data_to_db', on_message_callback=callback_data_to_db, auto_ack=True)
 
-    channel.queue_declare(queue='test')
-    channel.basic_consume(queue='test', on_message_callback=callback_test, auto_ack=True)
-
+    channel.queue_declare(queue='manage')
+    channel.basic_consume(queue='manage', on_message_callback=manager.callback, auto_ack=True)
 
     return channel
 

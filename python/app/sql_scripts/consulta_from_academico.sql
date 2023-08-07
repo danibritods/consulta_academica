@@ -1,6 +1,22 @@
 DROP SCHEMA IF EXISTS consulta CASCADE;
 CREATE SCHEMA IF NOT EXISTS consulta;
-CREATE ROLE query_consulta PASSWORD 'query_consulta';
+
+
+DO
+$do$
+BEGIN
+   IF EXISTS (
+      SELECT FROM pg_catalog.pg_roles
+      WHERE  rolname = 'query_consulta') THEN
+
+      RAISE NOTICE 'Role "query_consulta" already exists. Skipping.';
+   ELSE
+      CREATE ROLE my_user LOGIN PASSWORD 'query_consulta';
+   END IF;
+END
+$do$;
+-- source: https://stackoverflow.com/a/8099557
+
 GRANT USAGE ON SCHEMA consulta TO query_consulta;
 ALTER DEFAULT PRIVILEGES IN SCHEMA consulta GRANT SELECT ON TABLES TO query_consulta;
 
@@ -8,6 +24,7 @@ CREATE TABLE consulta.aluno AS (
     SELECT id, curso_id, matriz_id
     FROM alunos
 );
+
 
 CREATE TABLE consulta.disciplina_matriz AS (
   SELECT id, matriz_id, disciplina_id, periodo_referencia, area_de_concentracao_id
