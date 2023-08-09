@@ -45,3 +45,9 @@ services:
     command: python main.py
     volumes:
       - ./python/app:/app
+
+  api:
+    build: 
+      context: ./api
+    ports:
+      - 80:80
