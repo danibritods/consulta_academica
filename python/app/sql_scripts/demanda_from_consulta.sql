@@ -39,20 +39,3 @@ CREATE VIEW demanda.contagem_aluno_por_disciplina as (
   GROUP BY 
     disciplina_id 
 );
-
---TODO: Fix the error of conceding partial prerequisites in this implementation
---TODO: test which implementation performs better
--- CREATE VIEW demanda.disciplina_demandadaOG AS (
---   SELECT DISTINCT ON (r.aluno_id, r.disciplina_id)
---     r.aluno_id, r.disciplina_id
---   FROM demanda.disciplina_remanescente AS r
---   LEFT JOIN consulta.pre_requisito AS pr 
---     ON pr.pre_requisitante_id = r.disciplina_id
---   LEFT JOIN demanda.disciplina_aprovada AS apr 
---     ON apr.disciplina_id = pr.pre_requisito_id
---     AND apr.aluno_id = r.aluno_id
---   WHERE pr.pre_requisito_id IS NULL OR apr.disciplina_id IS NOT NULL
--- );
-
-
--- EXPLAIN ANALYZE SELECT * FROM demanda.contagem_aluno_por_disciplina;
