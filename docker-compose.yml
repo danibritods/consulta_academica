@@ -4,19 +4,29 @@ services:
   db:
     build:
       context: ./db
+    environment:
+      POSTGRES_DB: academico_db
+      POSTGRES_USER: auto_academ
+      POSTGRES_PASSWORD: auto_academ
     restart: always
     volumes:
       - ./db/data:/var/lib/postgresql/data
       - ./db/scripts:/home/scripts
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U auto_academ -d academico_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   ruby:
     build: 
       context: ./off_the_rails
     depends_on:
-      - db
-    command: bash -c "rake db:create && rake db:schema:load"
+      db:
+        condition: service_healthy
+    command: ruby main.rb
     volumes:
       - ./off_the_rails/app:/app
 
