@@ -11,7 +11,7 @@ BEGIN
 
       RAISE NOTICE 'Role "query_consulta" already exists. Skipping.';
    ELSE
-      CREATE ROLE my_user LOGIN PASSWORD 'query_consulta';
+      CREATE ROLE query_consulta LOGIN PASSWORD 'query_consulta_password';
    END IF;
 END
 $do$;
