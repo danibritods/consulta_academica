@@ -4,6 +4,10 @@ services:
   db:
     build:
       context: ./db
+    environment:
+      POSTGRES_DB: academico_db
+      POSTGRES_USER: auto_academ
+      POSTGRES_PASSWORD: auto_academ
     restart: always
     volumes:
       - ./db/data:/var/lib/postgresql/data
