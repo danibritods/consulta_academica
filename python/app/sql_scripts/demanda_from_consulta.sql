@@ -1,5 +1,8 @@
 CREATE SCHEMA IF NOT EXISTS demanda;
 
+GRANT USAGE ON SCHEMA demanda TO query_consulta;
+ALTER DEFAULT PRIVILEGES IN SCHEMA demanda GRANT SELECT ON VIEWS TO query_consulta;
+
 CREATE VIEW demanda.disciplina_aprovada AS (
   SELECT aluno_id, disciplina_id 
   FROM consulta.disciplina_cursada
