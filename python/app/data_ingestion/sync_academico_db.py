@@ -51,7 +51,7 @@ def body_to_rows(body):
 def _row_to_db(row):
     with database.connect_to_db() as conn:
         with conn.cursor() as cur:
-            cur.execute(*_row_to_insert_query(row))
+            cur.execute(*_row_to_insert_query(_filter_row(row)))
             conn.commit()
     #check faster implementations: https://stackoverflow.com/questions/8134602/psycopg2-insert-multiple-rows-with-one-query
 
@@ -67,3 +67,27 @@ def _row_to_insert_query(row):
         ON CONFLICT DO NOTHING
         """
         return (query,values)
+
+def _filter_columns(row, schema):
+    expected_columns = schema[row["table_name"]]
+    filtered_row = {k:v for (k,v) in row.items() if k in expected_columns}
+    filtered_row.update({"table_name":row["table_name"]})
+    return filtered_row
+
+def _filter_row(row):
+    schema = _get_academico_schema()
+    _filter_columns(row, schema)
+
+def _get_academico_schema():
+    with database.connect_to_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT table_name, column_name FROM information_schema.columns WHERE table_schema = 'public'")
+            results = cur.fetchall()
+
+    schema = {}
+    for result in results:
+        table_name = result[0]
+        column_name = result[1]
+        if table_name not in schema:
+            schema[table_name] = []
+        schema[table_name].append(column_name)

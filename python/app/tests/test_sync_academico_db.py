@@ -54,3 +54,11 @@ def test_body_to_rows_invalid_body_json_but_invalid_tuple_format():
     obtained = s.body_to_rows(test_body)
 
     assert obtained == expected
+
+
+def test_filter_columns():
+    row = {"table_name":"teste", "col_1": 1, "col_2": 2}
+    schema = {"teste": ["col_1", "col_3"]}
+    expected_row = {"table_name":"teste", "col_1": 1}
+
+    assert s._filter_columns(row, schema) == expected_row
