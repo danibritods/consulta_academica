@@ -1,7 +1,7 @@
-from typing import Union
+from collections import defaultdict
 
 import psycopg2
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 app = FastAPI()
 
