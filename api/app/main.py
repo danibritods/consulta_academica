@@ -29,7 +29,7 @@ def execute_sql_query(query: str):
         result = execute_query(query)
         return result
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=400, detail=str(e))
 
 @app.get("/")
 def read_root():
