@@ -33,6 +33,11 @@ def execute_sql_query(query: str):
 
 @app.get("/")
 def read_root():
+    return {"Saudações!":"API Consulta Acadêmica",
+            "Instruções":'consulte o banco de dados enviando a sua query por meio de um POST para "/execute_query"',
+            "exemplo de query:":"SELECT disciplina_id, contagem_alunos FROM demanda.contagem_aluno_por_disciplina;", 
+            "tabelas no formato {schema/: [tabelas]}" : get_schema() }
+
 def get_schema():
     #schema: {schema1: [table1,table2]. schema2: [table1, table2, table3]...}
     schema = defaultdict(list)
