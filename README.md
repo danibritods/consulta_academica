@@ -92,15 +92,20 @@ This project consists of the following services orchestrated by a Docker Compose
 ### Folder Structure
 ```md
 .
+├── api
+│   ├── app
+│   │   ├── __init__.py
+│   │   └── main.py
+│   ├── requirements.txt
+│   └── Dockerfile
+│
 ├── db
 │   ├── data
-│   ├── Dockerfile
-│   └── scripts
+│   ├── scripts
+│   └── Dockerfile
 │
 ├── docs
-│   ├── academico_bd.md
-│   ├── design.md
-│   └── schema_disciplinas.rb
+│   └── ...
 │
 ├── off_the_rails
 │   ├── app
@@ -116,7 +121,10 @@ This project consists of the following services orchestrated by a Docker Compose
 │   │   ├── data_ingestion
 │   │   │   ├── __init__.py
 │   │   │   ├── consumer.py
-│   │   │   └── write_to_db.py
+│   │   │   ├── database.py
+│   │   │   ├── manager.py
+│   │   │   ├── run_sql_scripts.py
+│   │   │   └── sync_academico_db.py
 │   │   │   
 │   │   ├── sql_scripts
 │   │   │   ├── consulta_from_academico.sql
@@ -125,8 +133,10 @@ This project consists of the following services orchestrated by a Docker Compose
 │   │   ├── tests
 │   │   │   ├── __init__.py
 │   │   │   ├── insert_mock_data.sql
+│   │   │   ├── test_manager.py
+│   │   │   ├── test_run_sql_scripts.sql
 │   │   │   ├── test_scripts.sql
-│   │   │   └── test_consumer.py
+│   │   │   └── test_sync_academico_db.py
 │   │   └── requirements.txt
 │   └── Dockerfile
 │
