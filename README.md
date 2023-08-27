@@ -14,15 +14,23 @@ This project consists of a docker compose orchestration to be run alongside the 
 ## Setup
 **consulta_academica** is intented to run internally alongside the "[Acadêmico][academico_url]", but you can run it locally following this instructions:
 
-1. Clone the repository: 
-        ```git clone```
-2. Build the compose: 
-        ```docker compose build```
-3. Running the services 
-        ```docker compose up```
+1. Clone the repository:
+   ```bash
+   git clone
+   ```
+3. Build the compose: 
+   ```bash
+   docker compose build
+   ```
+5. Running the services
+   ```bash
+   docker compose up
+   ```
 
 - You can stop the services with:
-        ```docker compose down```
+  ```bash
+  docker compose down
+  ```
 
 ## Use
 
