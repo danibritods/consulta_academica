@@ -92,6 +92,35 @@ This project's services maintain `consulta` and enable querying its tables.
 `demanda` is the schema of our first data feature developed from `consulta`. It builds a table containing each subject offered at UENF and its corresponding demand (in number of students) for the next period (`demanda.contagem_aluno_por_disciplina`). It also maintains all the intermediary tables necessary for the calculation because each one of them can be useful for other analysis. This schema is also accessible through the API.
 
 ## Schemas
+### `consulta`
+<details>
+   <summary>`consulta` tables</summary>
+   
+   | Column name                                   | Description |
+   |-----------------------------------------------|-------------|
+   | aluno                                         |             |
+   | disciplina_matriz                             |             |
+   | disciplina                                    |             |
+   | inscricao                                     |             |
+   | turma                                         |             |
+   | plano                                         |             |
+   | participacao                                  |             |
+   | atividade                                     |             |
+   | aproveitamento_de_atividade                   |             |
+   | equivalencia                                  |             |
+   | disciplina_isencao                            |             |
+   | disciplina_equivalencia_a_pedido              |             |
+   | disciplina_aproveitamento_interno             |             |
+   | disciplina_inscricao                          |             |
+   | disciplina_participacao                       |             |
+   | disciplina_cursada_ou_aproveitada             |             |
+   | disciplina_cursada_aproveitada_ou_equivalente |             |
+   | disciplina_cursada                            |             |
+   | pre_requisito                                 |             |
+   | co_requisito                                  |             |
+
+</details>
+
 
 ## Structure
 
