@@ -73,7 +73,16 @@ You can access the auto-generated API documentation at `/docs`.
 
 ## Message broker 
 **consulta_academica** has a RabbitMQ and python services to consume the queues at port 5672.
-Currently `data_to_db` is a queue to receive tuples from the "[Acadêmico][academico_url]" database. Internally only the non-personal data is processed and copied to the internal `academico_db` database. This process syncs the `academico_db` to the production database, in such a way as to have a separate database, without sensitive data, that can be used without impacting the performance of the "[Acadêmico][academico_url]". 
+Currently `data_to_db` is a queue to receive tuples from the "[Acadêmico][academico_url]" database. 
+The system expects tuples in the following format: 
+
+```
+[{"table_name":'table',"id":1,"col1":1,"col2":2,"col3":3},
+                            {"table_name":'table',"id":2,"col1":1,"col2":2,"col3":3}
+                            {"table_name":'table',"id":2,"col1":1,"col2":2,"col3":3}]
+```
+
+Internally only the non-personal data is processed and copied to the internal `academico_db` database. This process syncs the `academico_db` to the production database, in such a way as to have a separate database, without sensitive data, that can be used without impacting the performance of the "[Acadêmico][academico_url]". 
 
 The `manage` queue currently only supports the message "run_sql_scripts" which executes the [SQL scripts](#sql-scripts).
 
