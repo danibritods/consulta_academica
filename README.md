@@ -67,6 +67,7 @@ The response will be in JSON format, providing the queried data:
 ```
 #### API documentation
 You can access the auto-generated API documentation at `/docs`.
+
 ![api docs](docs/API_docs.png)
 
 
