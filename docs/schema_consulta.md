@@ -1,24 +1,25 @@
-- <details> <summary>consulta </summary>
-
-
+- <details> 
+  <summary>consulta </summary>
 
     - <details>
+  
       <summary>aluno</summary>
       
       - id
       - curso_id
       - matriz_id
-      
-    </details>
+
+      </details>
 
     - <details>
+
       <summary>aproveitamento_de_atividade</summary>
       
       - id
       - aluno_id
       - participacao_id
-      
-        </details>
+
+      </details>
 
     - <details>
       <summary>atividade</summary>
@@ -28,7 +29,7 @@
       - descricao
       - disciplina_id
       
-    </details>
+      </details>
 
     - <details>
       <summary>co_resuisito</summary>
@@ -36,7 +37,7 @@
       - co_requisitante_id
       - co_requisito_id
       
-    </details>
+      </details>
 
     - <details>
       <summary>disciplina</summary>
@@ -53,7 +54,7 @@
       - sigla
       - tipo_aprovacao
       
-    </details>
+      </details>
 
     - <details>
       <summary>disciplina_aproveitamento_interno</summary>
@@ -65,7 +66,7 @@
       - faltas
       - nota
       
-    </details>
+      </details>
 
     - <details>
       <summary>disciplina_cursada</summary>
@@ -78,7 +79,7 @@
       - origem
       - situacao
       
-    </details>
+      </details>
 
     - <details>
       <summary>disciplina_cursada_aproveitada_ou_equivalente</summary>
@@ -91,7 +92,7 @@
       - origem
       - situacao
       
-    </details>
+      </details>
 
     - <details>
       <summary>disciplina_cursada_ou_aproveitada</summary>
@@ -104,7 +105,7 @@
       - origem
       - situacao
       
-    </details>
+      </details>
 
     - <details>
       <summary>disciplina_equivalencia_a_pedido</summary>
@@ -116,7 +117,7 @@
       - id
       - nota
       
-    </details>
+      </details>
 
     - <details>
       <summary>disciplina_inscricao</summary>
@@ -129,7 +130,7 @@
       - nota_ef
       - situacao
       
-    </details>
+      </details>
 
     - <details>
       <summary>disciplina_isencao</summary>
@@ -139,7 +140,7 @@
       - disciplina_id
       - id
       
-    </details>
+      </details>
 
     - <details>
       <summary>disciplina_matriz</summary>
@@ -150,7 +151,7 @@
       - matriz_id
       - periodo_referencia
       
-    </details>
+      </details>
 
     - <details>
       <summary>disciplina_participacao</summary>
@@ -163,7 +164,7 @@
       - nota
       - situacao
       
-    </details>
+      </details>
 
     - <details>
       <summary>equivalencia</summary>
@@ -171,7 +172,7 @@
       - equivalente_id
       - equivalida_id
       
-    </details>
+      </details>
 
     - <details>
       <summary>inscricao</summary>
@@ -184,7 +185,7 @@
       - situacao
       - turma_id
       
-    </details>
+      </details>
 
     - <details>
       <summary>participacao</summary>
@@ -197,7 +198,7 @@
       - nota
       - satisfatoria_em
       
-    </details>
+      </details>
 
     - <details>
       <summary>plano</summary>
@@ -206,7 +207,7 @@
       - ano_semestre
       - id
       
-    </details>
+      </details>
 
     - <details>
       <summary>pre_requisito</summary>
@@ -214,7 +215,7 @@
       - pre_requisitante_id
       - pre_requisito_id
       
-    </details>
+      </details>
 
     - <details>
       <summary>turma</summary>
@@ -222,8 +223,7 @@
       - ano_semestre
       - codigo
       - disciplina_id
-      - id
-  
-</details>
+      - id  
+      </details>
 
 </details>
