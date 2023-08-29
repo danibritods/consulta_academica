@@ -16,7 +16,7 @@ This project consists of a docker compose orchestration to be run alongside the 
 
 1. Clone the repository:
    ```bash
-   git clone
+   git clone https://github.com/danibritods/consulta_academica
    ```
 3. Build the compose: 
    ```bash
