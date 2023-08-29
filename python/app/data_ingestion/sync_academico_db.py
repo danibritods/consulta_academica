@@ -57,9 +57,11 @@ def _row_to_db(row):
 
 def _row_to_insert_query(row):
         table_name = row["table_name"]
-        #[1:] to remove table_name from column names and values
-        columns = ", ".join( tuple(row.keys())[1:] )
-        values = tuple(row.values())[1:]
+
+        #remove "table_name" from row to insert the other values in db
+        del row["table_name"]
+        columns = ", ".join( tuple(row.keys()))
+        values = tuple(row.values())
 
         query = f"""
         INSERT INTO {table_name} ({columns})
