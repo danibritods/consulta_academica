@@ -78,7 +78,7 @@ def _filter_columns(row, schema):
 
 def _filter_row(row):
     schema = _get_academico_schema()
-    _filter_columns(row, schema)
+    return _filter_columns(row, schema)
 
 def _get_academico_schema():
     with database.connect_to_db() as conn:
