@@ -1,9 +1,14 @@
 
 from data_ingestion import database
+from data_ingestion import run_sql_scripts
 import logging
 from itertools import islice
 from collections import deque
 import json
+import threading
+
+TIMER_DURATION_MIN = 0.5
+TIMER_STATUS = False
 
 # Itertools recipe. Used here to efficiently apply a function to a list
 def consume_iterator(iterator, n=None):
@@ -21,6 +26,8 @@ def consume_iterator(iterator, n=None):
 def callback(ch, method, properties, body):
     logging.info(f"callback_data_to_db: message received : {body}")
     message_to_db(body)
+
+    run_scripts_after_data_ingestion()
 
 def message_to_db(body):
     """
@@ -109,3 +116,18 @@ def _get_academico_schema():
             schema[table_name] = []
         schema[table_name].append(column_name)
     return schema
+        
+def run_scripts_after_data_ingestion():
+    global TIMER_STATUS
+    timer = threading.Timer(TIMER_DURATION_MIN * 60, execute_scripts_end_timer)
+
+    if TIMER_STATUS:
+        pass
+    else:
+        TIMER_STATUS = True
+        timer.start()
+
+def execute_scripts_end_timer():
+    global TIMER_STATUS
+    run_sql_scripts.run_sql_scripts_in_db()
+    TIMER_STATUS = False
