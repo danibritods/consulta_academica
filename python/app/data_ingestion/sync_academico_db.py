@@ -91,3 +91,4 @@ def _get_academico_schema():
         if table_name not in schema:
             schema[table_name] = []
         schema[table_name].append(column_name)
+    return schema
