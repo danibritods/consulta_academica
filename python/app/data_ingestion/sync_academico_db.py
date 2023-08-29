@@ -49,11 +49,15 @@ def body_to_rows(body):
         return ()
 
 def _row_to_db(row):
-    with database.connect_to_db() as conn:
-        with conn.cursor() as cur:
-            cur.execute(*_row_to_insert_query(_filter_row(row)))
-            conn.commit()
-    #check faster implementations: https://stackoverflow.com/questions/8134602/psycopg2-insert-multiple-rows-with-one-query
+    filtered_row = _filter_row(row)
+    if filtered_row == {}:
+        pass
+    else:
+        with database.connect_to_db() as conn:
+            with conn.cursor() as cur:
+                cur.execute(*_row_to_insert_query(filtered_row))
+                conn.commit()
+        #check faster implementations: https://stackoverflow.com/questions/8134602/psycopg2-insert-multiple-rows-with-one-query
 
 def _row_to_insert_query(row):
         table_name = row["table_name"]
@@ -71,7 +75,18 @@ def _row_to_insert_query(row):
         return (query,values)
 
 def _filter_columns(row, schema):
-    expected_columns = schema[row["table_name"]]
+    if len(row) <= 1:
+        logging.warning(f'|_filter_columns| row seem empty: {row}')
+        return {}
+    try:
+        expected_columns = schema[row["table_name"]]
+    except KeyError:
+        logging.warning(f'|_filter_columns| table: {row["table_name"]} not present in schema')
+        return {}
+    except TypeError:
+        logging.warning(f'|_filter_columns| row seem empty: {row}')
+        return {}
+        
     filtered_row = {k:v for (k,v) in row.items() if k in expected_columns}
     filtered_row.update({"table_name":row["table_name"]})
     return filtered_row

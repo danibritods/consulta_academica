@@ -62,3 +62,24 @@ def test_filter_columns():
     expected_row = {"table_name":"teste", "col_1": 1}
 
     assert s._filter_columns(row, schema) == expected_row
+
+def test_filter_columns_table_absent_in_schema():
+    row = {"table_name":"teste", "col_1": 1, "col_2": 2}
+    schema = {}
+    expected_row = {}
+
+    assert s._filter_columns(row, schema) == expected_row
+
+def test_filter_columns_empty_table():
+    row = {"table_name":"teste"}
+    schema = {"teste": ["col_1", "col_3"]}
+    expected_row = {}
+
+    assert s._filter_columns(row, schema) == expected_row
+
+def test_filter_columns_empty_table_name():
+    row = {"table_name":""}
+    schema = {"teste": ["col_1", "col_3"]}
+    expected_row = {}
+
+    assert s._filter_columns(row, schema) == expected_row
