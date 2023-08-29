@@ -222,7 +222,7 @@ CREATE TABLE consulta.pre_requisito AS (
   FROM pre_requisitos
 );
 
-CREATE TABLE consulta.co_resuisito AS (
+CREATE TABLE consulta.co_requisito AS (
   SELECT co_requisitante_id, co_requisito_id
   FROM co_requisitos
 );
